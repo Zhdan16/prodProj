@@ -97,7 +97,7 @@ public class GetProdAndDo {
         int sum = 0;
         int sr = 0;
         for (Review r : reviewList){
-            if (r.getProduct().getId().intValue() == prod_id){
+            if (r.getPublished() && r.getProduct().getId().intValue() == prod_id){
                 sum++;
                 sr += r.getRate();
             }
