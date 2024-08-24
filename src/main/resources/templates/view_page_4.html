@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Список товаров</title>
+</head>
+<body>
+<form name="myForm" action="/products">
+    <input type="text" th:value="${tex}" placeholder="Введите название категории..." name="filter" style="width: 300px">
+  <input type="submit" value="Отфильтровать">
+</form>
+
+<th:block th:each="product : ${products}" >
+    <p>Категория: <b th:text="${product.getCategory()}"></b></p>
+    <p>Название: <b th:text="${product.getName()}"></b></p>
+    <p>Стоимость: <b th:text="${product.getPrice()}"></b></p>
+    <div class="lin" style="width: 99.9%; height: 1px; background-color: black; margin: auto;"></div>
+</th:block>
+
+</body>
+</html>

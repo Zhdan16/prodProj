@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Список товаров</title>
+</head>
+<body>
+<form name="myForm" action="/products1">
+  <input type="text" th:value="${tex}" placeholder="Введите название категории..." name="filter" style="width: 300px">
+  <input type="submit" value="Отфильтровать">
+</form>
+
+<th:block th:each="product : ${products}" >
+  <div style="display: flex">
+    <div>
+      <p>Категория: <b th:text="${product.getCategory().getName()}"></b></p>
+      <p>Название: <b th:text="${product.getName()}"></b></p>
+      <p>Стоимость: <b th:text="${product.getPrice()}"></b></p>
+    </div>
+    <form style="margin-right: 100px;width: 50px; height: 21px;" name="myForm" action="/products1/remake">
+      <input type="hidden" name="param" th:value="${product.getId()}">
+      <input type="submit" value="Отредактировать">
+    </form>
+    <form style="margin-right: 100px;width: 50px; height: 21px;" name="info" action="/products1/info">
+      <input type="hidden" name="prod_id" th:value="${product.getId()}">
+      <input type="submit" value="Информация о товаре">
+    </form>
+  </div>
+
+  <div class="lin" style="width: 99.9%; height: 1px; background-color: black; margin: auto;"></div>
+</th:block>
+
+</body>
+</html>

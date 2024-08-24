@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>viewController</title>
+</head>
+<body>
+<th:block th:if="${human.getAge() >= 18}">
+    <p>Name: <b th:text="${human.getName()}"></b></p>
+    <p>Age: <b th:text="${human.getAge()}"></b></p>
+</th:block>
+<b th:if="${human.getAge() < 18}">Людям младше 18 лет, просмотр страницы не доступен</b>
+</body>
+</html>

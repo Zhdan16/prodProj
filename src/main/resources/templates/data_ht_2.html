@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Добавить товар</title>
+</head>
+<body>
+<div style="margin: 0 auto; width: 260px">
+  <h1 style="width: 230px; margin: 0 auto">Добавить товар</h1>
+  <form style="margin-top: 10px;" th:object="${product}" method="post" action="/products1/create">
+    <label style="margin-right: 5px" for="category">Категория:</label>
+    <input type="number" th:field="*{category}" id="category" style="margin-bottom: 20px"/>
+    <br/>
+    <label style="margin-right: 10px" for="name">Название:</label>
+    <input type="text" th:field="*{name}" id="name" style="margin-bottom: 20px" />
+    <br/>
+    <label for="price">Стоимость:</label>
+    <input type="number" th:field="*{price}" id="price" style="margin-bottom: 20px"/>
+    <br/>
+    <input type="submit" value="Добавить товар" />
+  </form>
+</div>
+</body>
+</html>

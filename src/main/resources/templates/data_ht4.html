@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Информация о товаре</title>
+</head>
+<body>
+<div>
+    <div style="width: 500px; border: 1px solid black; padding: 3px; margin-bottom: 10px">
+        <p>Категория: <b th:text="${product.getCategory().getName()}"></b></p>
+        <p>Название: <b th:text="${product.getName()}"></b></p>
+        <p>Стоимость: <b th:text="${product.getPrice()}"></b></p>
+    </div>
+    <div style="width: 500px; border: 1px solid black; padding: 3px">
+        Отзывы:
+        <th:block th:each="rewiew : ${reviews}">
+            <p th:if="${rewiew.product.id == product.id && rewiew.getPublished()}"><b th:text="${rewiew.getUser().getFirstName()}"></b> <b th:text="${rewiew.getUser().getLastName()}"></b> : <b th:text="${rewiew.getText()}"></b>    Оценка: <b th:text="${rewiew.getRate()}"></b></p>
+        </th:block>
+        <p>Рейтинг: <b th:text="${rating}"></b></p>
+    </div>
+
+
+
+    <div style="width: 500px; border: 1px solid black; padding: 3px; margin-top: 10px">
+        Характеристики:
+        <th:block  th:each="value : ${values}">
+            <p th:if="${product.getId() == value.getProduct().getId()}"> <b th:text="${value.getOption().getName()}"></b>: <b th:text="${value.getValue()}"></b> </b></p>
+        </th:block>
+    </div>
+
+</div>
+</body>
+</html>

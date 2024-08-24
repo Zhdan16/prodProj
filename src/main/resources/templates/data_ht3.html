@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Редактирование товара</title>
+</head>
+<body>
+<div style="margin: 0 auto; width: 320px">
+    <h1 style="width: 320px; margin: 0 auto">Редактировать товар</h1>
+    <form style="margin-left: 8%;margin-top: 10px;" th:object="${product}" method="post" action="/products1/remake">
+
+        <label style="margin-right: 5px" for="category">Категория:</label>
+        <input type="number" th:value="${product.getCategory().getId()}" th:field="*{category.id}" id="category" style="margin-bottom: 20px"/>
+        <br/>
+        <label style="margin-right: 10px" for="name">Название:</label>
+        <input type="text" th:value="${product.getName()}" th:field="*{name}" id="name" style="margin-bottom: 20px" />
+        <br/>
+        <label for="price">Стоимость:</label>
+        <input type="number" th:value="${product.getPrice()}" th:field="*{price}" id="price" style="margin-bottom: 20px"/>
+        <br/>
+        <input type="hidden" th:value="${product.getId()}" th:field="*{id}"/>
+        <input type="submit" value="Изменить товар" />
+
+    </form>
+</div>
+</body>
+</html>
