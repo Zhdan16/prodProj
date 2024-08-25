@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отзыв</title>
+</head>
+<body>
+<div>
+    Отзыв:
+    <form th:object="${review}" method="post" action="/products1/rev">
+        <input type="number" th:field="*{user.id}" placeholder="Введите id покупателя">
+        <input type="hidden" th:value="${tov_id}" name="tov_id" >
+        <input type="number" th:field="*{rate}" placeholder="Введите оценку">
+        <input type="text" th:field="*{text}" placeholder="Введите текст отзыва">
+        <input type="submit" value="Отправить отзыв">
+    </form>
+</div>
+</body>
+</html>
