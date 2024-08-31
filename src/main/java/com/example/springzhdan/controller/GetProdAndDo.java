@@ -1,9 +1,6 @@
 package com.example.springzhdan.controller;
 
-import com.example.springzhdan.enity.Option;
-import com.example.springzhdan.enity.Product;
-import com.example.springzhdan.enity.Review;
-import com.example.springzhdan.enity.Value;
+import com.example.springzhdan.enity.*;
 import com.example.springzhdan.repository.OptionsRepository;
 import com.example.springzhdan.repository.ProductRepository;
 import com.example.springzhdan.repository.ReviewRepository;
@@ -99,6 +96,13 @@ public class GetProdAndDo {
         model.addAttribute("options", optionList);
         model.addAttribute("values", valueList);
         model.addAttribute("rating", rating);
+        for(Review reviews: userService.getCurrentUser().getReviews()){
+            if (reviews.getProduct().getId() == prod_id.intValue()){
+                model.addAttribute("user", reviews);
+                break;
+            }
+            model.addAttribute("user", null);
+        }
 
         return "data_ht4";
     }

@@ -29,11 +29,12 @@
     </div>
 
     <div style="display: flex; margin-top: 5px; margin-left: 3px; justify-content: space-between; width: 500px">
-        <form action="/products1/rev">
-            <input type="submit" value="Оставить отзыв">
-            <input type="hidden" name="tov_id" th:value="${product.id}">
-        </form>
-
+        <th:block th:if="${user == null}">
+            <form action="/products1/rev">
+                <input type="submit" value="Оставить отзыв">
+                <input type="hidden" name="tov_id" th:value="${product.id}">
+            </form>
+        </th:block>
         <form action="/products1">
             <input type="submit" value="Вернуться на главную">
         </form>

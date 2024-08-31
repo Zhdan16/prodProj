@@ -13,6 +13,7 @@
         <input style="margin-bottom: 4px" type="text" th:field="*{text}" placeholder="Введите текст отзыва">
         <input type="hidden" th:value="${review.getProduct().id}" th:field="*{product.id}">
         <input type="submit" value="Отправить отзыв">
+
     </form>
     <form action="/products1">
         <input type="submit" value="Вернуться на главную">
