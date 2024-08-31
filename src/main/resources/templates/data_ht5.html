@@ -5,14 +5,17 @@
     <title>Отзыв</title>
 </head>
 <body>
-<div>
+<div >
     Отзыв:
-    <form th:object="${review}" method="post" action="/products1/rev">
-        <input type="number" th:field="*{user.id}" placeholder="Введите id покупателя">
-        <input type="hidden" th:value="${tov_id}" name="tov_id" >
-        <input type="number" th:field="*{rate}" placeholder="Введите оценку">
-        <input type="text" th:field="*{text}" placeholder="Введите текст отзыва">
+    <form style="width: 200px; margin-bottom: 2px" th:object="${review}" method="post" action="/products1/rev">
+        <input style="margin-bottom: 4px" type="number" th:field="*{user.id}" placeholder="Введите id покупателя">
+        <input style="margin-bottom: 4px" type="number" th:field="*{rate}" placeholder="Введите оценку">
+        <input style="margin-bottom: 4px" type="text" th:field="*{text}" placeholder="Введите текст отзыва">
+        <input type="hidden" th:value="${review.getProduct().id}" th:field="*{product.id}">
         <input type="submit" value="Отправить отзыв">
+    </form>
+    <form action="/products1">
+        <input type="submit" value="Вернуться на главную">
     </form>
 </div>
 </body>

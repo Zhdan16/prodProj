@@ -115,15 +115,22 @@ public class GetProdAndDo {
     @GetMapping(path = "/rev")
     public String rev(Model model, @RequestParam(name = "tov_id") Integer tov_id){
 
-        model.addAttribute("review", new Review());
+        Review review = new Review();
+        List<Product> listList = new ArrayList<>(productRepository.findAll());
+        for (Product product: listList){
+            if (product.getId().intValue() == tov_id){
+                review.setProduct(product);
+                break;
+            }
+        }
+        model.addAttribute("review", review);
         model.addAttribute("tov_id", tov_id);
         return "data_ht5";
     }
 
     @RequestMapping(value = "/rev", method = RequestMethod.POST)
-    public String revOk(Review review, @RequestParam(name = "tov_id") Integer tov_id) {
+    public String revOk(Review review) {
         review.setPublished(Boolean.TRUE);
-        review.setProduct(productRepository.findAll().get(tov_id-1));
         reviewRepository.save(review);
 
         return "redirect:/products1/info?prod_id=" + review.getProduct().getId();

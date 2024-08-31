@@ -20,8 +20,11 @@
         <br/>
         <input type="hidden" th:value="${product.getId()}" th:field="*{id}"/>
         <input type="submit" value="Изменить товар" />
-
+        <form action="/products1">
+            <input type="submit" value="Вернуться на главную">
+        </form>
     </form>
+
 </div>
 </body>
 </html>
