@@ -8,6 +8,7 @@ import com.example.springzhdan.repository.OptionsRepository;
 import com.example.springzhdan.repository.ProductRepository;
 import com.example.springzhdan.repository.ReviewRepository;
 import com.example.springzhdan.repository.ValuesRepository;
+import com.example.springzhdan.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
@@ -25,6 +26,7 @@ public class GetProdAndDo {
     private final ValuesRepository valuesRepository;
     private final OptionsRepository optionsRepository;
     private final ReviewRepository reviewRepository;
+    public final UserService userService;
 
     @GetMapping(path = "")
     public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category) {
@@ -61,15 +63,9 @@ public class GetProdAndDo {
     }
 
     @GetMapping(path = "/remake")
-    public String remakeProd(Model model, @RequestParam(name = "param") Integer prod_id){
-        List<Product> listList = new ArrayList<>(productRepository.findAll());
-        for (Product product: listList){
-            if (product.getId().intValue() == prod_id){
-                model.addAttribute("product", product);
-                break;
-            }
-        }
-
+    public String remakeProd(Model model, @RequestParam(name = "param") Long prod_id){
+        Product product = productRepository.getReferenceById(prod_id);
+        model.addAttribute("product", product);
         return "data_ht3";
     }
 
@@ -82,14 +78,9 @@ public class GetProdAndDo {
     }
 
     @GetMapping(path = "/info")
-    public String infoProd(Model model, @RequestParam(name = "prod_id") Integer prod_id){
-        List<Product> listList = new ArrayList<>(productRepository.findAll());
-        for (Product product: listList){
-            if (product.getId().intValue() == prod_id){
-                model.addAttribute("product", product);
-                break;
-            }
-        }
+    public String infoProd(Model model, @RequestParam(name = "prod_id") Long prod_id){
+        Product product = productRepository.getReferenceById(prod_id);
+        model.addAttribute("product", product);
         List<Review> reviewList = new ArrayList<>(reviewRepository.findAll());
         List<Option> optionList = new ArrayList<>(optionsRepository.findAll());
         List<Value> valueList = new ArrayList<>(valuesRepository.findAll());
@@ -113,24 +104,22 @@ public class GetProdAndDo {
     }
 
     @GetMapping(path = "/rev")
-    public String rev(Model model, @RequestParam(name = "tov_id") Integer tov_id){
-
+    public String rev(Model model, @RequestParam(name = "tov_id") Long tov_id){
         Review review = new Review();
-        List<Product> listList = new ArrayList<>(productRepository.findAll());
-        for (Product product: listList){
-            if (product.getId().intValue() == tov_id){
-                review.setProduct(product);
-                break;
-            }
-        }
+        Product product = productRepository.getReferenceById(tov_id);
+        review.setProduct(product);
+        review.setUser(userService.getCurrentUser());
+
         model.addAttribute("review", review);
         model.addAttribute("tov_id", tov_id);
+
         return "data_ht5";
     }
 
     @RequestMapping(value = "/rev", method = RequestMethod.POST)
     public String revOk(Review review) {
         review.setPublished(Boolean.TRUE);
+
         reviewRepository.save(review);
 
         return "redirect:/products1/info?prod_id=" + review.getProduct().getId();
