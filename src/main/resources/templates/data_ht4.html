@@ -14,7 +14,7 @@
     <div style="width: 500px; border: 1px solid black; padding: 3px">
         Отзывы:
         <th:block th:each="rewiew : ${reviews}">
-            <p th:if="${rewiew.product.id == product.id && rewiew.getPublished()}"><b th:text="${rewiew.getUser().getFirstName()}"></b> <b th:text="${rewiew.getUser().getLastName()}"></b> : <b th:text="${rewiew.getText()}"></b>    Оценка: <b th:text="${rewiew.getRate()}"></b></p>
+            <p><b th:text="${rewiew.getUser().getFirstName()}"></b> <b th:text="${rewiew.getUser().getLastName()}"></b> : <b th:text="${rewiew.getText()}"></b>    Оценка: <b th:text="${rewiew.getRate()}"></b></p>
         </th:block>
         <p>Рейтинг: <b th:text="${rating}"></b></p>
     </div>

@@ -76,7 +76,7 @@ public class GetProdAndDo {
     public String infoProd(Model model, @RequestParam(name = "prod_id") Long prod_id){
         Product product = productRepository.getReferenceById(prod_id);
         model.addAttribute("product", product);
-        List<Review> reviewList = new ArrayList<>(reviewRepository.findAll());
+        List<Review> reviewList = new ArrayList<>(reviewRepository.r(prod_id));
         List<Option> optionList = new ArrayList<>(optionsRepository.findAll());
         List<Value> valueList = new ArrayList<>(valuesRepository.findAll());
 
