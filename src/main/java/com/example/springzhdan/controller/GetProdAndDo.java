@@ -1,10 +1,7 @@
 package com.example.springzhdan.controller;
 
 import com.example.springzhdan.enity.*;
-import com.example.springzhdan.repository.OptionsRepository;
-import com.example.springzhdan.repository.ProductRepository;
-import com.example.springzhdan.repository.ReviewRepository;
-import com.example.springzhdan.repository.ValuesRepository;
+import com.example.springzhdan.repository.*;
 import com.example.springzhdan.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -24,6 +21,7 @@ public class GetProdAndDo {
     private final OptionsRepository optionsRepository;
     private final ReviewRepository reviewRepository;
     public final UserService userService;
+    public final UserRepository userRepository;
 
     @GetMapping(path = "")
     public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category) {
@@ -96,14 +94,7 @@ public class GetProdAndDo {
         model.addAttribute("options", optionList);
         model.addAttribute("values", valueList);
         model.addAttribute("rating", rating);
-        for(Review reviews: userService.getCurrentUser().getReviews()){
-            if (reviews.getProduct().getId() == prod_id.intValue()){
-                model.addAttribute("user", reviews);
-                break;
-            }
-            model.addAttribute("user", null);
-        }
-
+        model.addAttribute("user", userRepository.r(userService.getCurrentUser().getId(), prod_id));
         return "data_ht4";
     }
 
