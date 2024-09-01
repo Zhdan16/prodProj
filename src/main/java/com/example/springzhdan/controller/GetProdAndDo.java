@@ -80,20 +80,10 @@ public class GetProdAndDo {
         List<Option> optionList = new ArrayList<>(optionsRepository.findAll());
         List<Value> valueList = new ArrayList<>(valuesRepository.findAll());
 
-        int sum = 0;
-        int sr = 0;
-        for (Review r : reviewList){
-            if (r.getPublished() && r.getProduct().getId().intValue() == prod_id){
-                sum++;
-                sr += r.getRate();
-            }
-        }
-
-        int rating = Math.round((float) sr/sum);
         model.addAttribute("reviews", reviewList);
         model.addAttribute("options", optionList);
         model.addAttribute("values", valueList);
-        model.addAttribute("rating", rating);
+        model.addAttribute("rating", reviewRepository.rate(prod_id));
         model.addAttribute("user", userRepository.r(userService.getCurrentUser().getId(), prod_id));
         return "data_ht4";
     }
