@@ -22,6 +22,7 @@ public class GetProdAndDo {
     private final ReviewRepository reviewRepository;
     public final UserService userService;
     public final UserRepository userRepository;
+    public final BasketRepository basketRepository;
 
     @GetMapping(path = "")
     public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category) {
@@ -74,6 +75,7 @@ public class GetProdAndDo {
 
     @GetMapping(path = "/info")
     public String infoProd(Model model, @RequestParam(name = "prod_id") Long prod_id){
+
         Product product = productRepository.getReferenceById(prod_id);
         model.addAttribute("product", product);
         List<Review> reviewList = new ArrayList<>(reviewRepository.r(prod_id));
@@ -85,6 +87,7 @@ public class GetProdAndDo {
         model.addAttribute("values", valueList);
         model.addAttribute("rating", reviewRepository.rate(prod_id));
         model.addAttribute("user", userRepository.r(userService.getCurrentUser().getId(), prod_id));
+        model.addAttribute("basket", basketRepository.prods(userService.getCurrentUser().getId()).contains(product));
         return "data_ht4";
     }
 
@@ -108,6 +111,24 @@ public class GetProdAndDo {
         reviewRepository.save(review);
 
         return "redirect:/products1/info?prod_id=" + review.getProduct().getId();
+    }
+
+    @GetMapping(path = "/basket")
+    public String basket(Model model){
+        model.addAttribute("basket", basketRepository.prods(userService.getCurrentUser().getId()));
+        return "data_ht6";
+    }
+
+    @RequestMapping(value = "/basket", method = RequestMethod.POST)
+    public String basketAdd(@RequestParam(name = "tov_id") Long productId) {
+        Product product = productRepository.getReferenceById(productId);
+        Basket basket = new Basket();
+        basket.setUser(userRepository.getReferenceById(userService.getCurrentUser().getId()));
+        basket.setProduct(product);
+
+        basketRepository.save(basket);
+
+        return "redirect:/products1/info?prod_id=" + productId;
     }
 }
 

@@ -12,6 +12,6 @@ public class UserService {
     public UserRepository userRepository;
 
     public User getCurrentUser() {
-        return userRepository.getReferenceById(4L);
+        return userRepository.getReferenceById(1L);
     }
 }

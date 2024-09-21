@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина</title>
+</head>
+<body>
+    <th:block th:each="prod : ${basket}">
+        <div style="display: flex; align-items: center; border: 1px solid black; padding: 3px; margin-bottom: 4px">
+            <div style="margin-right: 10px" >
+                <p>Категория: <b th:text="${prod.getCategory().getName()}"></b></p>
+                <p>Название: <b th:text="${prod.getName()}"></b></p>
+                <p>Стоимость: <b th:text="${prod.getPrice()}"></b></p>
+            </div>
+            <form style="margin-right: 100px;width: 50px; height: 21px;" name="info" action="/products1/info">
+                <input type="hidden" name="prod_id" th:value="${prod.getId()}">
+                <input type="submit" value="Информация о товаре">
+            </form>
+        </div>
+    </th:block>
+    <form action="/products1">
+        <input type="submit" value="Вернуться на главную">
+    </form>
+</body>
+</html>

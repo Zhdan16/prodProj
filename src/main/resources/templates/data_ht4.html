@@ -38,6 +38,12 @@
         <form action="/products1">
             <input type="submit" value="Вернуться на главную">
         </form>
+        <th:block th:if="${!basket}">
+            <form method="post" action="/products1/basket" >
+                <input type="hidden" name="tov_id" th:value="${product.id}">
+                <input type="submit" value="Добавить в корзину">
+            </form>
+        </th:block>
     </div>
 
 </div>

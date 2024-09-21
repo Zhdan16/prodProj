@@ -5,10 +5,17 @@
   <title>Список товаров</title>
 </head>
 <body>
-<form  style="margin-bottom: 10px" name="myForm" action="/products1">
-  <input type="text" th:value="${tex}" placeholder="Введите название категории..." name="filter" style="width: 300px">
-  <input type="submit" value="Отфильтровать">
-</form>
+<div style="display: flex; justify-content: space-between;">
+  <form  style="margin-bottom: 10px" name="myForm" action="/products1">
+    <input type="text" th:value="${tex}" placeholder="Введите название категории..." name="filter" style="width: 300px">
+    <input type="submit" value="Отфильтровать">
+  </form>
+
+  <form style="margin-bottom: 10px" action="/products1/basket">
+    <input type="submit" value="Моя корзина">
+  </form>
+</div>
+
 
 <th:block th:each="product : ${products}" >
   <div style="display: flex; align-items: center; border: 1px solid black; padding: 3px; margin-bottom: 4px">
