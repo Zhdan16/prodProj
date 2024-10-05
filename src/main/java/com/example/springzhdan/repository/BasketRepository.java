@@ -1,15 +1,17 @@
 package com.example.springzhdan.repository;
 
 import com.example.springzhdan.enity.Basket;
-import com.example.springzhdan.enity.Product;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-
 import java.util.List;
 
 public interface BasketRepository extends JpaRepository<Basket, Long> {
-    @Query("select b.product from Basket b where b.user.id=:user")
-    List<Product> prods (long user);
+    @Query("select b from Basket b where b.user.id=:user")
+    List<Basket> prods (long user);
 
+    @Query("select b.count from Basket b where b.user.id=:user and b.product.id=:product")
+    Integer count (long user, long product);
 
+    @Query("select b.id from Basket b where b.user.id=:user and b.product.id=:product")
+    Long bId (long user, long product);
 }

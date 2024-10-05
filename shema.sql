@@ -49,8 +49,8 @@ create table order_products(
     product_id int8 not null,
     primary key (id),
     foreign key (order_id) references orders(id),
-    foreign key (product_id) references products(id),
-    unique (order_id, product_id)
+    foreign key (product_id) references products(id)
+
 );
 
 create table options(
@@ -76,10 +76,11 @@ create table basket(
     id serial8,
     product_id int8 not null,
     user_id int8 not null,
+    count int4 not null,
     primary key (id),
     foreign key (product_id) references products(id),
     foreign key (user_id) references users(id),
-    unique (user_id, product_id)
+    unique (id, user_id)
 );
 
 create table review(
@@ -154,6 +155,7 @@ VALUES
 INSERT INTO order_products (order_id, product_id)
 VALUES
     (1, 1),
+    (1, 1),
     (1, 2),
     (2, 3),
     (2, 4),
@@ -193,18 +195,18 @@ VALUES
     (5, 8, 'Pantene');
 
 -- Insert 10 basket entries
-INSERT INTO basket (product_id, user_id)
+INSERT INTO basket (product_id, user_id, count)
 VALUES
-    (1, 1),
-    (2, 2),
-    (3, 3),
-    (4, 4),
-    (5, 5),
-    (6, 6),
-    (7, 7),
-    (8, 8),
-    (9, 9),
-    (10, 10);
+    (1, 1, 1),
+    (2, 2, 1),
+    (3, 3, 1),
+    (4, 4, 1),
+    (5, 5, 1),
+    (6, 6, 1),
+    (7, 7, 1),
+    (8, 8, 1),
+    (9, 9, 1),
+    (10, 10, 1);
 
 INSERT INTO review (user_id, product_id, rate, text, published)
 VALUES

@@ -22,4 +22,6 @@ public class Basket {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+
+    private Integer count;
 }

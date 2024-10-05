@@ -122,11 +122,18 @@ public class GetProdAndDo {
     @RequestMapping(value = "/basket", method = RequestMethod.POST)
     public String basketAdd(@RequestParam(name = "tov_id") Long productId) {
         Product product = productRepository.getReferenceById(productId);
-        Basket basket = new Basket();
+        Basket basket;
+        if (basketRepository.bId(userService.getCurrentUser().getId(), productId) != null){
+            basket = basketRepository.getReferenceById(basketRepository.bId(userService.getCurrentUser().getId(), productId));
+            basket.setCount(basketRepository.count(userService.getCurrentUser().getId(), product.getId())+1);
+        }else {
+            basket = new Basket();
+            basket.setCount(1);
+        }
         basket.setUser(userRepository.getReferenceById(userService.getCurrentUser().getId()));
         basket.setProduct(product);
-
         basketRepository.save(basket);
+
 
         return "redirect:/products1/info?prod_id=" + productId;
     }
