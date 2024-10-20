@@ -16,8 +16,14 @@
             <p>Количество товара: <b th:text="${prod.getCount()}"></b></p>
 
             <form style="margin-left: 100px;margin-right: 100px;width: 50px; height: 21px;" name="info" action="/products1/info">
-                <input type="hidden" name="prod_id" th:value="${prod.getId()}">
+                <input type="hidden" name="prod_id" th:value="${prod.getProduct().getId()}">
                 <input type="submit" value="Информация о товаре">
+            </form>
+
+            <form method="post" style="margin-left: 100px;margin-right: 100px;width: 50px; height: 21px;" name="bs" action="/products1/order">
+                <input type="hidden" name="tov_id" th:value="${prod.getProduct().getId()}" >
+                <input type="hidden" name="count" th:value="${prod.getCount()}" >
+                <input type="submit" value="Заказать">
             </form>
         </div>
     </th:block>

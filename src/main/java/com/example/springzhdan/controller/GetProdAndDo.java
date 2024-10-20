@@ -3,9 +3,10 @@ package com.example.springzhdan.controller;
 import com.example.springzhdan.enity.*;
 import com.example.springzhdan.repository.*;
 import com.example.springzhdan.service.UserService;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.query.Order;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,6 +24,9 @@ public class GetProdAndDo {
     public final UserService userService;
     public final UserRepository userRepository;
     public final BasketRepository basketRepository;
+    public final OrderProductRepository orderProductsRepository;
+    public  final OrderRepository orderRepository;
+
 
     @GetMapping(path = "")
     public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category) {
@@ -70,7 +74,7 @@ public class GetProdAndDo {
     public String remakeProdOk(Product product) {
 
        productRepository.save(product);
-        return "redirect:/products1";
+       return "redirect:/products1";
     }
 
     @GetMapping(path = "/info")
@@ -87,7 +91,7 @@ public class GetProdAndDo {
         model.addAttribute("values", valueList);
         model.addAttribute("rating", reviewRepository.rate(prod_id));
         model.addAttribute("user", userRepository.r(userService.getCurrentUser().getId(), prod_id));
-        model.addAttribute("basket", basketRepository.prods(userService.getCurrentUser().getId()).contains(product));
+
         return "data_ht4";
     }
 
@@ -115,6 +119,8 @@ public class GetProdAndDo {
 
     @GetMapping(path = "/basket")
     public String basket(Model model){
+        OrderProducts orderProducts = new OrderProducts();
+        model.addAttribute("ord", orderProducts);
         model.addAttribute("basket", basketRepository.prods(userService.getCurrentUser().getId()));
         return "data_ht6";
     }
@@ -136,6 +142,32 @@ public class GetProdAndDo {
 
 
         return "redirect:/products1/info?prod_id=" + productId;
+    }
+
+    @GetMapping(path = "/order")
+    public String order(Model model){
+        model.addAttribute("order", orderProductsRepository.order(userService.getCurrentUser().getId()));
+        return "data_ht7";
+    }
+
+    @RequestMapping(value = "/order", method = RequestMethod.POST)
+    public String ord(@RequestParam(name = "tov_id") Long productId, @RequestParam(name = "count") Integer count) {
+        Orders order = new Orders();
+        OrderProducts orderProducts = new OrderProducts();
+        java.util.Date date = new java.util.Date();
+        order.setUser(userService.getCurrentUser());
+        order.setAddress(userService.address());
+        order.setOrderDate(date);
+        order.setStatus(1);
+        orderRepository.save(order);
+
+        orderProducts.setOrder(order);
+        orderProducts.setProduct(productRepository.getReferenceById(productId));
+        orderProducts.setCount(count);
+        orderProductsRepository.save(orderProducts);
+        basketRepository.delete(basketRepository.getReferenceById(basketRepository.bId(userService.getCurrentUser().getId(), productId)));
+
+        return "redirect:/products1/basket";
     }
 }
 

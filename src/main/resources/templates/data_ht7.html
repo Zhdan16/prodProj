@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Мои заказы</title>
+</head>
+<body>
+<th:block th:each="ord : ${order}">
+    <div style="width: 500px; border: 1px solid black; padding: 3px; margin-bottom: 10px">
+        <p>категория продукта: <b th:text="${ord.getProduct().getCategory().getName()}"></b></p>
+        <p>название продукта: <b th:text="${ord.getProduct().getName()}"></b></p>
+        <p>цена продукта: <b th:text="${ord.getProduct().getPrice()}"></b></p>
+        <p>количество продукта: <b th:text="${ord.getCount()}"></b></p>
+    </div>
+
+</th:block>
+<form action="/products1">
+    <input type="submit" value="Вернуться на главную">
+</form>
+</body>
+</html>

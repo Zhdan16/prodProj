@@ -22,4 +22,6 @@ public class OrderProducts {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    private Integer count;
 }

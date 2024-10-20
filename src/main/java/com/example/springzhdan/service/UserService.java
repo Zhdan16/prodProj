@@ -1,6 +1,8 @@
 package com.example.springzhdan.service;
 
+import com.example.springzhdan.enity.Orders;
 import com.example.springzhdan.enity.User;
+
 import com.example.springzhdan.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,4 +16,9 @@ public class UserService {
     public User getCurrentUser() {
         return userRepository.getReferenceById(1L);
     }
+
+    public String address(){
+        return "123 Main St";
+    }
+
 }
