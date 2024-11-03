@@ -15,6 +15,7 @@ create table users(
       password varchar not null,
       first_name varchar not null,
       last_name varchar not null,
+      admin boolean,
       primary key (id),
       unique (email)
 );
@@ -96,18 +97,12 @@ create table review(
     unique (user_id, product_id)
 );
 
-INSERT INTO users (email, password, first_name, last_name)
+INSERT INTO users (email, password, first_name, last_name, admin)
 VALUES
-    ('user1@example.com', 'password1', 'John', 'Doe'),
-    ('user2@example.com', 'password2', 'Jane', 'Smith'),
-    ('user3@example.com', 'password3', 'Bob', 'Johnson'),
-    ('user4@example.com', 'password4', 'Alice', 'Williams'),
-    ('user5@example.com', 'password5', 'Mike', 'Brown'),
-    ('user6@example.com', 'password6', 'Emily', 'Davis'),
-    ('user7@example.com', 'password7', 'Sarah', 'Miller'),
-    ('user8@example.com', 'password8', 'Tom', 'Wilson'),
-    ('user9@example.com', 'password9', 'Lily', 'Moore'),
-    ('user10@example.com', 'password10', 'James', 'Taylor');
+    ('admin@example.com', 'password1', 'Zhdan', 'Solodovnikov', true),
+    ('user1@example.com', 'password1', 'John', 'Doe', false),
+    ('user2@example.com', 'password2', 'Jane', 'Smith', false);
+
 
 -- Insert 10 categories
 INSERT INTO categories (name)
@@ -198,24 +193,13 @@ INSERT INTO basket (product_id, user_id, count)
 VALUES
     (1, 1, 1),
     (2, 2, 1),
-    (3, 3, 1),
-    (4, 4, 1),
-    (5, 5, 1),
-    (6, 6, 1),
-    (7, 7, 1),
-    (8, 8, 1),
-    (9, 9, 1),
-    (10, 10, 1);
+    (3, 3, 1);
+
+
 
 INSERT INTO review (user_id, product_id, rate, text, published)
 VALUES
     (1, 1, 5, 'Great product!', true),
     (2, 2, 4, 'Good, but not perfect', true),
-    (3, 3, 5, 'Love it!', true),
-    (4, 4, 3, 'Okay, but not impressed', true),
-    (5, 5, 5, 'Best product ever!', true),
-    (6, 6, 4, 'Good value for money', true),
-    (7, 7, 5, 'Excellent product!', true),
-    (8, 8, 3, 'Not bad, but not great', true),
-    (9, 9, 5, 'Fantastic product!', true),
-    (10, 10, 4, 'Good, but not perfect', true);
+    (3, 3, 5, 'Love it!', true);
+

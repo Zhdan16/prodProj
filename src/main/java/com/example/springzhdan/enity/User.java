@@ -23,6 +23,8 @@ public class User {
 
     private String lastName;
 
+    private String admin;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<Orders> orders;

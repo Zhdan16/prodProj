@@ -14,8 +14,9 @@ public class UserService {
     public UserRepository userRepository;
 
     public User getCurrentUser() {
-        return userRepository.getReferenceById(1L);
+        return userRepository.getReferenceById(2L);
     }
+
 
     public String address(){
         return "123 Main St";

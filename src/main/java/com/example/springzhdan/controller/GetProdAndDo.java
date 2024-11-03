@@ -39,14 +39,18 @@ public class GetProdAndDo {
 
         } else {
             for (Product product : productRepository.findAll()) {
-                if (product.getCategory().getName().equals(category)) {
+                if (product.getCategory().getName().toLowerCase().contains(category.toLowerCase())) {
                     listList.add(product);
                 }
             }
+
             model.addAttribute("tex", category);
             model.addAttribute("products", listList);
 
         }
+        model.addAttribute("admin", userService.getCurrentUser());
+        model.addAttribute("ifadmin", userService.getCurrentUser().getAdmin());
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + userService.getCurrentUser().getAdmin() + "\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         return "data_ht";
     }
 
@@ -91,6 +95,7 @@ public class GetProdAndDo {
         model.addAttribute("values", valueList);
         model.addAttribute("rating", reviewRepository.rate(prod_id));
         model.addAttribute("user", userRepository.r(userService.getCurrentUser().getId(), prod_id));
+        System.out.println("product: " + product.getId());
 
         return "data_ht4";
     }
@@ -168,6 +173,48 @@ public class GetProdAndDo {
         basketRepository.delete(basketRepository.getReferenceById(basketRepository.bId(userService.getCurrentUser().getId(), productId)));
 
         return "redirect:/products1/basket";
+    }
+    @RequestMapping(value = "/del", method = RequestMethod.POST)
+    public String del(@RequestParam(name = "prod_id") Long prodId){
+        System.out.println("12837108273012038128");
+        Product product = productRepository.getReferenceById(prodId);
+
+        List<Review> review = reviewRepository.findAll();
+        for (Review r : review){
+            if(Objects.equals(r.getProduct().getId(), prodId)){
+                reviewRepository.delete(r);
+                System.out.println("ok");
+            }
+        }
+
+        List<Value> values = valuesRepository.findAll();
+        for (Value v : values){
+            if(Objects.equals(v.getProduct().getId(), prodId)){
+                valuesRepository.delete(v);
+                System.out.println("okgg");
+            }
+        }
+
+        List<Basket> baskets = basketRepository.findAll();
+        for (Basket b : baskets){
+            if(Objects.equals(b.getProduct().getId(), prodId)){
+                basketRepository.delete(b);
+                System.out.println("oksdfsdf");
+            }
+        }
+
+        List<OrderProducts> orders = orderProductsRepository.findAll();
+        for (OrderProducts o : orders){
+            if(Objects.equals(o.getProduct().getId(), prodId)){
+                orderProductsRepository.delete(o);
+                System.out.println("y");
+            }
+        }
+
+
+        productRepository.delete(product);
+
+        return "redirect:/products1";
     }
 }
 
