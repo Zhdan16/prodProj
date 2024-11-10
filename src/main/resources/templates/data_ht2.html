@@ -7,7 +7,7 @@
 <body>
 <div style="margin: 0 auto; width: 260px">
   <h1 style="width: 230px; margin: 0 auto">Добавить товар</h1>
-  <form style="margin-top: 10px;" th:object="${product}" method="post" action="/products1/create">
+  <form style="margin-top: 10px;" th:object="${product}" method="post" action="/create">
     <label style="margin-right: 5px" for="category">Категория:</label>
     <input type="number" th:field="*{category}" id="category" style="margin-bottom: 20px"/>
     <br/>
@@ -19,7 +19,7 @@
     <br/>
     <input type="submit" value="Добавить товар" />
   </form>
-  <form action="/products1">
+  <form action="/products">
     <input type="submit" value="Вернуться на главную">
   </form>
 </div>
