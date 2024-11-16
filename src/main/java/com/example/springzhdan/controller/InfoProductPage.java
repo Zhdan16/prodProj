@@ -47,7 +47,7 @@ public class InfoProductPage {
             model.addAttribute("ifadmin", userService.getCurrentUser().getAdmin());
         }else {
             model.addAttribute("ifadmin", false);
-            model.addAttribute("user2", null);
+            model.addAttribute("user", "not");
 
         }
 

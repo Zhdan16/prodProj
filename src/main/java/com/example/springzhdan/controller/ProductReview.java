@@ -31,7 +31,7 @@ public class ProductReview {
 
     @RequestMapping(value = "/rev", method = RequestMethod.POST)
     public String revOk(Review review) {
-        review.setPublished(Boolean.TRUE);
+        review.setPublished(Boolean.FALSE);
 
         reviewRepository.save(review);
 

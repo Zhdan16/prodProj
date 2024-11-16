@@ -18,22 +18,21 @@ public class ProductsPage {
     public final UserService userService;
 
     @GetMapping(path = "/products")
-    public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category) {
+    public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category, @RequestParam(name = "page") Integer page) {
 
         List<Product> listList = new ArrayList<>();
         if (category == null || category.isEmpty()) {
-            listList.addAll(productRepository.findAll());
-            listList.sort(Comparator.comparingLong(Product::getId));
-            model.addAttribute("products", listList);
-
+            model.addAttribute("products", productRepository.products(userService.getCurrentUser().getId()));
+            model.addAttribute("pages", ((productRepository.products(userService.getCurrentUser().getId()).size()+4)/ 5));
         } else {
-            for (Product product : productRepository.findAll()) {
+            for (Product product : productRepository.products(userService.getCurrentUser().getId())) {
                 if (product.getCategory().getName().toLowerCase().contains(category.toLowerCase())) {
                     listList.add(product);
                 }
             }
             model.addAttribute("tex", category);
             model.addAttribute("products", listList);
+            model.addAttribute("pages", ((listList.size()+4)/ 5));
 
         }
         model.addAttribute("user", userService.getCurrentUser());
@@ -42,8 +41,11 @@ public class ProductsPage {
         }else {
             model.addAttribute("ifadmin", false);
         }
+
+        model.addAttribute("page", page);
         return "data_ht";
     }
+
 }
 
 

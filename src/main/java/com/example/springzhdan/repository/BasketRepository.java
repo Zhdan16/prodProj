@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface BasketRepository extends JpaRepository<Basket, Long> {
-    @Query("select b from Basket b where b.user.id=:user")
+    @Query("select b from Basket b where b.user.id=:user order by b.orderIndex")
     List<Basket> prods (long user);
 
     @Query("select b.count from Basket b where b.user.id=:user and b.product.id=:product")

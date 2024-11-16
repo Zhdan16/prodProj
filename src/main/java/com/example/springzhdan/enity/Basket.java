@@ -23,5 +23,9 @@ public class Basket {
     @JoinColumn(name = "user_id")
     private User user;
 
+    @JoinColumn(name = "count")
     private Integer count;
+
+    @JoinColumn(name = "order_index")
+    private Integer orderIndex;
 }

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Комментарии</title>
+</head>
+<body>
+    <th:block th:each="c : ${check}">
+        <div th:if="${!c.getPublished()}">
+            <div style="margin-bottom: 10px;border: 1px solid black;border-radius: 30px; padding-left: 30px;padding-top: 3px;padding-bottom: 3px;">
+                <p>Имя: <b th:text="${c.getUser().getFirstName()}"></b> </p><p>Фамилия: <b th:text="${c.getUser().getLastName()}"></b></p>
+                <p>Категория: <b th:text="${c.getProduct().getCategory().getName()}"></b></p>
+                <p>Название: <b th:text="${c.getProduct().getName()}"></b></p>
+                <p>Цена: <b th:text="${c.getProduct().getPrice()}"></b></p>
+                <p>Текст комментария: <b th:text="${c.getText()}"></b></p>
+                <form method="post" style="margin-bottom: 10px" action="/reviews">
+                    <input type="submit" value="Опубликовать">
+                    <input type="hidden" name="comId" th:value="${c.getId()}">
+
+                </form>
+
+            </div>
+        </div>
+
+    </th:block>
+    <form action="/products">
+        <input type="submit" value="Вернуться на главную">
+        <input type="hidden" name="page" th:value="${1}">
+    </form>
+</body>
+</html>

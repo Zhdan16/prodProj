@@ -53,6 +53,6 @@ public class ProductsDelete {
 
         productRepository.delete(product);
 
-        return "redirect:/products";
+        return "redirect:/products?page=1";
     }
 }

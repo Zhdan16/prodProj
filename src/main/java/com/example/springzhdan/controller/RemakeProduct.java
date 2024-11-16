@@ -23,7 +23,7 @@ public class RemakeProduct {
     public String remakeProdOk(Product product) {
 
         productRepository.save(product);
-        return "redirect:/products";
+        return "redirect:/products?page=1";
     }
 
 

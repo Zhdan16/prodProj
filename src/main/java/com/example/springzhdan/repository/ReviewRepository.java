@@ -10,6 +10,9 @@ public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select r from Review r where r.product.id=:product and r.published")
     List<Review> r (long product);
 
+    @Query("select r from Review r where  r.published=:product")
+    List<Review> check (boolean product);
+
     @Query("select avg(r.rate) from Review r where r.product.id=:product")
     Integer rate (long product);
 }
