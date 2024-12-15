@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <style>
+        body {
+            margin: 0; /* Убираем отступы у body */
+            height: 100vh; /* Задаем высоту на весь экран */
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            grid-auto-rows: 300px; /* Высота строк фиксированная */
+            justify-items: center; /* Центрируем элементы по горизонтали */
+            align-items: center; /* Центрируем элементы по вертикали */
+            height: 100%; /* Высота сетки на весь экран */
+        }
+
+        li {
+            border: 1px solid black;
+            display: flex;
+            justify-content: center; /* Центрируем текст по горизонтали */
+            align-items: center; /* Центрируем текст по вертикали */
+            height: 90%; /* Высота элемента 80% от высоты ячейки */
+            width: 90%; /* Ширина элемента 80% от ширины ячейки */
+        }
+    </style>
+</head>
+<body>
+<div class="grid">
+    <li>Product 1</li>
+    <li>Product 2</li>
+    <li>Product 3</li>
+    <li>Product 4</li>
+    <li>Product 5</li>
+    <li>Product 6</li>
+    <li>Product 7</li>
+    <li>Product 8</li>
+    <li>Product 9</li>
+    <li>Product 10</li>
+    <li>Product 11</li>
+    <li>Product 12</li>
+    <li>Product 13</li>
+    <li>Product 14</li>
+    <li>Product 15</li>
+    <li>Product 16</li>
+</div>
+</body>
+</html>

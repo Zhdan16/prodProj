@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 public interface UserRepository extends JpaRepository<User, Long> {
     @Query("select r from Review r where r.user.id =:user and r.product.id =:product")
     Review r (long user, long product);
+
+    @Query("select s from User s where s.email =: name")
+    User s (String name);
 }

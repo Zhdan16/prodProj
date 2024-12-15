@@ -6,7 +6,7 @@
   <title>Список товаров</title>
   <link rel="stylesheet"  th:href="@{/style/styleForDataHt.css}">
 </head>
-<body style="display: flex; flex-direction: column;">
+<body>
 <div class="top_block" >
 <!--  <th:block th:if="${user != null}">-->
 <!--    <div>-->
@@ -56,35 +56,38 @@
 
 </div>
 
-<th:block  th:each="i: ${#numbers.sequence((page * 5) - 5, page * 5 - 1)}" >
-  <div class="product" th:if="${i < products.size()}">
-    <div class="one" >
-      <p>Категория: <b th:text="${products[i].getCategory().getName()}"></b></p>
-      <p>Название: <b th:text="${products[i].getName()}"></b></p>
-      <p>Стоимость: <b th:text="${products[i].getPrice()}"></b></p>
-    </div>
-    <th:block th:if="${ifadmin.equals('t')}">
-      <form class="two"  name="myForm" action="/remake">
-        <input type="hidden" name="param" th:value="${products[i].getId()}">
-        <input type="submit" value="Отредактировать">
-      </form>
-    </th:block>
-    <th:block th:if="${ifadmin.equals('t')}">
-      <form method="post" class="two"  name="myForm" action="/del">
-        <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
-        <input type="submit" value="удалить товар">
-      </form>
-    </th:block>
+<div class="grid">
+  <th:block th:each="i: ${#numbers.sequence((page * 10) - 10, page * 10 - 1)}" >
+    <div class="product" th:if="${i < products.size()}">
+      <div class="one" >
+        <p>Категория: <b th:text="${products[i].getCategory().getName()}"></b></p>
+        <p>Название: <b th:text="${products[i].getName()}"></b></p>
+        <p>Стоимость: <b th:text="${products[i].getPrice()}"></b></p>
 
-    <form class="two" name="info" action="/info">
-      <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
-      <input type="submit" value="Информация о товаре">
-    </form>
-  </div>
-</th:block>
+        <th:block th:if="${ifadmin.equals('t')}">
+          <form class="two"  name="myForm" action="/remake">
+            <input type="hidden" name="param" th:value="${products[i].getId()}">
+            <input type="submit" value="Отредактировать">
+          </form>
+        </th:block>
+        <th:block th:if="${ifadmin.equals('t')}">
+          <form method="post" class="two"  name="myForm" action="/del">
+            <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
+            <input type="submit" value="удалить товар">
+          </form>
+        </th:block>
 
-<div style="display: flex; height: 40px; width: 40px; margin-left: auto;
-    margin-right: auto;">
+        <form class="two" name="info" action="/info">
+          <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
+          <input type="submit" value="Информация о товаре">
+        </form>
+      </div>
+      </div>
+  </th:block>
+</div>
+
+
+<div class="pagination">
   <th:block  th:each="i: ${#numbers.sequence(1, pages)}">
     <form action="/products">
       <input type="hidden" name="filter" th:value="${tex}">

@@ -17,13 +17,16 @@ public class ProductsPage {
     private final ProductRepository productRepository;
     public final UserService userService;
 
-    @GetMapping(path = "/products")
-    public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category, @RequestParam(name = "page") Integer page) {
 
+    @GetMapping(path = "/products")
+    public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category, @RequestParam(name = "page", required = false) Integer page) {
+        if (page == null){
+            return "redirect:/products?page=1";
+        }
         List<Product> listList = new ArrayList<>();
         if (category == null || category.isEmpty()) {
             model.addAttribute("products", productRepository.products(userService.getCurrentUser().getId()));
-            model.addAttribute("pages", ((productRepository.products(userService.getCurrentUser().getId()).size()+4)/ 5));
+            model.addAttribute("pages", ((productRepository.products(userService.getCurrentUser().getId()).size()+9)/ 10));
         } else {
             for (Product product : productRepository.products(userService.getCurrentUser().getId())) {
                 if (product.getCategory().getName().toLowerCase().contains(category.toLowerCase())) {
@@ -32,7 +35,7 @@ public class ProductsPage {
             }
             model.addAttribute("tex", category);
             model.addAttribute("products", listList);
-            model.addAttribute("pages", ((listList.size()+4)/ 5));
+            model.addAttribute("pages", ((listList.size()+9)/ 10));
 
         }
         model.addAttribute("user", userService.getCurrentUser());
@@ -45,6 +48,8 @@ public class ProductsPage {
         model.addAttribute("page", page);
         return "data_ht";
     }
+
+
 
 }
 

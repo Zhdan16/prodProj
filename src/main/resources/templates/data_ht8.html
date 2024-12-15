@@ -13,6 +13,7 @@
                 <p>Название: <b th:text="${c.getProduct().getName()}"></b></p>
                 <p>Цена: <b th:text="${c.getProduct().getPrice()}"></b></p>
                 <p>Текст комментария: <b th:text="${c.getText()}"></b></p>
+                <p>Оценка: <b th:text="${c.getRate()}"></b></p>
                 <form method="post" style="margin-bottom: 10px" action="/reviews">
                     <input type="submit" value="Опубликовать">
                     <input type="hidden" name="comId" th:value="${c.getId()}">
