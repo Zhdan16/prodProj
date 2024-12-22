@@ -20,37 +20,45 @@ public class ProductsPage {
 
     @GetMapping(path = "/products")
     public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category, @RequestParam(name = "page", required = false) Integer page) {
-        if (page == null){
+        if (page == null) {
             return "redirect:/products?page=1";
         }
-        List<Product> listList = new ArrayList<>();
-        if (category == null || category.isEmpty()) {
-            model.addAttribute("products", productRepository.products(userService.getCurrentUser().getId()));
-            model.addAttribute("pages", ((productRepository.products(userService.getCurrentUser().getId()).size()+9)/ 10));
-        } else {
-            for (Product product : productRepository.products(userService.getCurrentUser().getId())) {
-                if (product.getCategory().getName().toLowerCase().contains(category.toLowerCase())) {
-                    listList.add(product);
-                }
-            }
-            model.addAttribute("tex", category);
-            model.addAttribute("products", listList);
-            model.addAttribute("pages", ((listList.size()+9)/ 10));
+        List<Product> productList = new ArrayList<>();
+        Long userId = null;
 
-        }
-        model.addAttribute("user", userService.getCurrentUser());
-        if (userService.getCurrentUser() != null){
+        if (userService.getCurrentUser() != null) {
+            userId = userService.getCurrentUser().getId();
+            model.addAttribute("user", userService.getCurrentUser());
             model.addAttribute("ifadmin", userService.getCurrentUser().getAdmin());
-        }else {
+        } else {
+            model.addAttribute("user", null);
             model.addAttribute("ifadmin", false);
+        }
+
+        if (userId != null) {
+            if (category == null || category.isEmpty()) {
+                List<Product> products = productRepository.products(userId);
+                model.addAttribute("products", products);
+                model.addAttribute("pages", (products.size() + 9) / 10);
+            } else {
+                for (Product product : productRepository.products(userId)) {
+                    if (product.getCategory().getName().toLowerCase().contains(category.toLowerCase())) {
+                        productList.add(product);
+                    }
+                }
+                model.addAttribute("tex", category);
+                model.addAttribute("products", productList);
+                model.addAttribute("pages", (productList.size() + 9) / 10);
+            }
+        } else {
+            productList.addAll(productRepository.findAll());
+            model.addAttribute("products", productList);
+            model.addAttribute("pages", (productList.size() + 9) / 10);
         }
 
         model.addAttribute("page", page);
         return "data_ht";
     }
-
-
-
 }
 
 
