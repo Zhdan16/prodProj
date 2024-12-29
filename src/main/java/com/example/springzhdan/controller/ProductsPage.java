@@ -19,6 +19,7 @@ public class ProductsPage {
 
 
     @GetMapping(path = "/products")
+
     public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category, @RequestParam(name = "page", required = false) Integer page) {
         if (page == null) {
             return "redirect:/products?page=1";

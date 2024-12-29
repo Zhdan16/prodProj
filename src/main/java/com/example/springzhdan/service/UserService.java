@@ -15,10 +15,11 @@ public class UserService {
     public UserRepository userRepository;
 
     public User getCurrentUser() {
-//        String context = SecurityContextHolder.getContext().getAuthentication().getName();
+        SecurityContext context = SecurityContextHolder.getContext();
+        Authentication authentication = context.getAuthentication();
+        String username = authentication.getName();
 
-
-        return null;
+        return userRepository.s(username);
     }
 
     public String address(){
