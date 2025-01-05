@@ -22,7 +22,7 @@
     </form>
   </div>
 
-  <th:block th:if="${ifadmin.equals('t')}">
+  <th:block th:if="${ifadmin.equals(true)}">
     <form class="two" name="myForm" action="/create">
       <input type="submit" value="добавить товар">
     </form>
@@ -34,16 +34,22 @@
 
   <th:block th:if="${user == null}">
     <div class="authorization">
-      <form class="two" name="info" action="">
-        <input type="submit" value="Авторизация">
+      <form class="two" action="/registration">
+        <input type="hidden" name="tov_id" th:value="${1}">
+        <input type="submit" value="Регистрация">
       </form>
-      <form class="two" name="info" action="/login">
-        <input type="submit" value="Вход">
-      </form>
+      <a href="/login">Вход</a>
     </div>
   </th:block>
 
-  <th:block th:if="${!ifadmin.equals('t') && user != null}">
+  <th:block th:if="${user != null}">
+      <form class="two" action="/logout">
+        <input type="hidden" name="tov_id" th:value="${1}">
+        <input type="submit" value="Выход">
+      </form>
+  </th:block>
+
+  <th:block th:if="${!ifadmin.equals(true) && user != null}">
     <div class="buy">
       <form style="margin-bottom: 10px" action="/order">
         <input type="submit" value="Мои заказы">
@@ -64,13 +70,14 @@
         <p>Название: <b th:text="${products[i].getName()}"></b></p>
         <p>Стоимость: <b th:text="${products[i].getPrice()}"></b></p>
 
-        <th:block th:if="${ifadmin.equals('t')}">
+        <th:block th:if="${ifadmin.equals(true)}">
           <form class="two"  name="myForm" action="/remake">
             <input type="hidden" name="param" th:value="${products[i].getId()}">
+            <input type="hidden" name="page" th:value="${page}">
             <input type="submit" value="Отредактировать">
           </form>
         </th:block>
-        <th:block th:if="${ifadmin.equals('t')}">
+        <th:block th:if="${ifadmin.equals(true)}">
           <form method="post" class="two"  name="myForm" action="/del">
             <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
             <input type="submit" value="удалить товар">

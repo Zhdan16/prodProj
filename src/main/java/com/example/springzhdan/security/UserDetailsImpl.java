@@ -29,9 +29,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         String role = "null";
-        if (user.getAdmin().equals("t")){
+        if (user.getAdmin().equals(true)){
             role = "ROLE_admin";
-        }else if (user.getAdmin().equals("f")){
+        }else if (user.getAdmin().equals(false)){
             role = "ROLE_user";
         }
         return Collections.singletonList(new SimpleGrantedAuthority(role));

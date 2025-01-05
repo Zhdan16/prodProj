@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Отзыв</title>
+</head>
+<body>
+<div >
+    Регистрация:
+    <form style="width: 200px; margin-bottom: 2px" th:object="${reg}" method="post" action="/registration">
+
+        <input style="margin-bottom: 4px" type="text" th:field="*{email}" placeholder="Введите почту">
+        <input style="margin-bottom: 4px" type="text" th:field="*{password}" placeholder="Введите пароль">
+        <input style="margin-bottom: 4px" type="text" th:field="*{firstName}" placeholder="Введите имя">
+        <input style="margin-bottom: 4px" type="text" th:field="*{lastName}" placeholder="Введите фамилию">
+
+        <input type="submit" value="Зарегестрироваться">
+
+    </form>
+    <form action="/products">
+        <input type="submit" value="Вернуться на главную">
+        <input type="hidden" name="page" th:value="${1}">
+    </form>
+</div>
+</body>
+</html>

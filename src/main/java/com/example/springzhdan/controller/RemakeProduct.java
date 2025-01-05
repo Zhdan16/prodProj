@@ -12,19 +12,17 @@ import org.springframework.web.bind.annotation.*;
 public class RemakeProduct {
     private final ProductRepository productRepository;
     @GetMapping(path = "/remake")
-    public String remakeProd(Model model, @RequestParam(name = "param") Long prod_id) {
+    public String remakeProd(Model model, @RequestParam(name = "param") Long prod_id, @RequestParam(name = "page") Integer page) {
         Product product = productRepository.getReferenceById(prod_id);
         model.addAttribute("product", product);
+        model.addAttribute("page", page);
         return "data_ht3";
     }
 
-
     @RequestMapping(value = "/remake", method = RequestMethod.POST)
-    public String remakeProdOk(Product product) {
+    public String remakeProdOk(Product product, Integer page) {
 
         productRepository.save(product);
-        return "redirect:/products?page=1";
+        return "redirect:/products?page=" + page;
     }
-
-
 }

@@ -23,7 +23,7 @@ public class User {
 
     private String lastName;
 
-    private String admin;
+    private Boolean admin;
 
     @JsonIgnore
     @OneToMany(mappedBy = "user")

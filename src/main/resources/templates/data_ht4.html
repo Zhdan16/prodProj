@@ -34,7 +34,7 @@
 
 
     <div style="display: flex; margin-top: 5px; margin-left: 3px; justify-content: space-between; width: 500px">
-        <th:block th:if="${(user == null || user == 'not') && ifadmin.equals('f') }">
+        <th:block th:if="${(user == null || user == 'not') && ifadmin.equals(false) }">
             <form action="/rev">
                 <input type="submit" value="Оставить отзыв">
                 <input type="hidden" name="tov_id" th:value="${product.id}">
@@ -44,7 +44,7 @@
             <input type="submit" value="Вернуться на главную">
             <input type="hidden" name="page" th:value="${1}">
         </form>
-        <th:block th:if="${!ifadmin.equals('t') && user != 'not'}">
+        <th:block th:if="${!ifadmin.equals(true) && user != 'not'}">
             <form method="post" action="/basket" >
                 <input type="hidden" name="tov_id" th:value="${product.getId()}">
                 <input type="submit" value="Добавить в корзину">

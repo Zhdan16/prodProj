@@ -23,7 +23,13 @@ public class SecurityConfig {
             authConfigurer.anyRequest().permitAll();
         });
 
-        httpSecurity.formLogin(Customizer.withDefaults());
+        httpSecurity.formLogin(formLoginConfigurer -> {
+            formLoginConfigurer.defaultSuccessUrl("/products");
+        });
+
+        httpSecurity.logout(logoutConfigurer -> {
+            logoutConfigurer.logoutSuccessUrl("/products");
+        });
         return httpSecurity.build();
     }
 
