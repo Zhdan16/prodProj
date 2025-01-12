@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Long> {
-    @Query("select p from Product p order by p.id")
-    List<Product> products (long user);
+    @Query("select p from Product p")
+    List<Product> products ();
 
 }

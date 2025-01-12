@@ -2,6 +2,7 @@ package com.example.springzhdan.controller;
 
 import com.example.springzhdan.enity.*;
 import com.example.springzhdan.repository.*;
+import com.example.springzhdan.service.CatalogService;
 import com.example.springzhdan.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -11,16 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(path = "")
 public class ProductReview {
-    private final ProductRepository productRepository;
-    private final ReviewRepository reviewRepository;
+    public final CatalogService catalogService;
     public final UserService userService;
     @GetMapping(path = "/rev")
     public String rev(Model model, @RequestParam(name = "tov_id") Long tov_id) {
         Review review = new Review();
-        Product product = productRepository.getReferenceById(tov_id);
-        review.setProduct(product);
+
+        review.setProduct(catalogService.productSearch(tov_id));
         review.setUser(userService.getCurrentUser());
 
         model.addAttribute("review", review);
@@ -33,7 +32,7 @@ public class ProductReview {
     public String revOk(Review review) {
         review.setPublished(Boolean.FALSE);
 
-        reviewRepository.save(review);
+        catalogService.saveRev().save(review);
 
         return "redirect:/info?prod_id=" + review.getProduct().getId();
     }

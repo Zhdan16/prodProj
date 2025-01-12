@@ -3,6 +3,7 @@ package com.example.springzhdan.controller;
 import com.example.springzhdan.enity.Product;
 import com.example.springzhdan.enity.Review;
 import com.example.springzhdan.repository.ReviewRepository;
+import com.example.springzhdan.service.CatalogService;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.mapping.List;
 import org.springframework.stereotype.Controller;
@@ -14,23 +15,22 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(path = "")
 public class ReviewsCheck {
-    private final ReviewRepository reviewRepository;
+    private final CatalogService catalogService;
 
     @GetMapping(path = "/reviews")
     public String remakeProd(Model model) {
 
-        model.addAttribute("check",reviewRepository.check(false));
+        model.addAttribute("check", catalogService.checking(false));
         return "data_ht8";
     }
 
     @RequestMapping(path = "/reviews", method = RequestMethod.POST)
     public String remProd(@RequestParam(name = "comId") Long id){
 
-        Review review = reviewRepository.getReferenceById(id);
+        Review review = catalogService.reviewSearch(id);
         review.setPublished(Boolean.TRUE);
-        reviewRepository.save(review);
+        catalogService.saveRev().save(review);
 
         return "redirect:/reviews";
     }

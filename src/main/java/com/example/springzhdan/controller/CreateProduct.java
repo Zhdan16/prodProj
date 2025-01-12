@@ -1,6 +1,7 @@
 package com.example.springzhdan.controller;
 import com.example.springzhdan.enity.*;
 import com.example.springzhdan.repository.*;
+import com.example.springzhdan.service.CatalogService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,9 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(path = "")
 public class CreateProduct {
-    private final ProductRepository productRepository;
+    public final CatalogService catalogService;
     @GetMapping(path = "/create")
     public String secondResource(Model model) {
         model.addAttribute("product", new Product());
@@ -19,7 +19,7 @@ public class CreateProduct {
 
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String createProduct(Product product) {
-        productRepository.save(product);
+        catalogService.saveProd().save(product);
         return "redirect:/create";
     }
 }

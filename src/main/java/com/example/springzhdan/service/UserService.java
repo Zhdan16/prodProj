@@ -19,7 +19,7 @@ public class UserService {
         Authentication authentication = context.getAuthentication();
         String username = authentication.getName();
 
-        return userRepository.s(username);
+        return userRepository.user(username);
     }
 
     public String address(){

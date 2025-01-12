@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface ValuesRepository extends JpaRepository<Value, Long> {
     @Query("select v from Value v where v.product.id=:product")
-    List<Value> v(long product);
+    List<Value> value(long product);
 }

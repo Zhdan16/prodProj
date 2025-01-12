@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     @Query("select r from Review r where r.product.id=:product and r.published")
-    List<Review> r (long product);
+    List<Review> review (long product);
 
     @Query("select r from Review r where  r.published=:product")
     List<Review> check (boolean product);

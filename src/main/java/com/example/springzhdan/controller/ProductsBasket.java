@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequiredArgsConstructor
-@RequestMapping(path = "")
 public class ProductsBasket {
     private final ProductRepository productRepository;
     public final UserService userService;

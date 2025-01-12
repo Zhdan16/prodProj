@@ -34,7 +34,7 @@
 
 
     <div style="display: flex; margin-top: 5px; margin-left: 3px; justify-content: space-between; width: 500px">
-        <th:block th:if="${(user == null || user == 'not') && ifadmin.equals(false) }">
+        <th:block th:if="${user == null  && ifadmin.equals(false) }">
             <form action="/rev">
                 <input type="submit" value="Оставить отзыв">
                 <input type="hidden" name="tov_id" th:value="${product.id}">
