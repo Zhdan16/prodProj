@@ -1,0 +1,93 @@
+*{
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
+    overflow-x: hidden;
+}
+
+body{
+    box-sizing: border-box;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #000000,#212121,#4f4f4f) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.reg{
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #d0c3ac;
+    border-radius: 20px;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+.back2{
+    position: relative;
+    box-sizing: border-box;
+    height: 30px;
+    width: 150px;
+    font-size: 14px;
+    padding-left: 10px;
+    background-color: #d0c3ac;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin-top: 445px;
+}
+
+.back2:hover{
+    background-color: #1e1f22;
+    color: #667ec0;
+    transition-duration: 0.4s;
+}
+
+.formReg{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 200px;
+    width: 350px;
+}
+
+input{
+    background-color: #d0c3ac;
+    outline: none;
+    border-radius: 10px;
+    height: 25px;
+    padding-left: 10px;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+}
+
+input:hover{
+    background-color: #1e1f22;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: white;
+}
+
+.butReg:hover{
+    background-color: #1e1f22;
+    color: #667ec0;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.butReg{
+    height: 30px;
+    width: 150px;
+    font-size: 14px;
+    padding-left: 5px;
+}

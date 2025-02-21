@@ -1,4 +1,4 @@
-*{
+{
     font-family: "Pangolin", serif;
     font-weight: 400;
     font-style: normal;
@@ -12,39 +12,6 @@ body{
     background-size: cover;
     width: 100%;
     background: linear-gradient(180deg, #000000,#212121,#4f4f4f) no-repeat center center fixed;
-}
-
-.filterTextField{
-    height: 30px;
-    box-sizing: border-box;
-    padding-left: 10px;
-    width: 200px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-    outline: none;
-    border: 1px solid black;
-}
-
-.filterBut{
-    width: 90px;
-    height: 30px;
-    font-size: 12px;
-    background-color: #d0c3ac;
-    color: black;
-    padding-left: 4px;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-    border: 1px solid black;
-    border-left: none;
-}
-
-.filterBut:hover{
-    background-color: #1e1f22;
-    transition-duration: 0.4s;
-    color: #667ec0;
-
 }
 
 .form:hover{
@@ -63,62 +30,39 @@ body{
     display: flex;
     box-sizing: border-box;
     justify-content: space-between;
+    flex-direction: row-reverse;
+
 }
+.back{
+    position: relative;
 
-
-
-.login{
-    width: 90px;
-    height: 30px;
-    font-size: 11px;
+}
+.butBack{
+    margin-left: 10px;
+    color: #1e1f22;
     background-color: #d0c3ac;
-    color: black;
-    border: 1px solid black;
-    border-left: none;
-    padding-left: 4px;
-    border-bottom-right-radius: 10px;
-    border-top-right-radius: 10px;
-    cursor: pointer;
+    border: 1px solid  #1e1f22;
+    border-radius: 5px;
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 30px;
+    width: 150px;
     transition-duration: 0.4s;
-
 }
-.login:hover{
+.butBack:hover{
     background-color: #1e1f22;
     color: #667ec0;
     transition-duration: 0.4s;
-}
-
-.registration:hover{
-    background-color: #1e1f22;
-    color: #667ec0;
-    transition-duration: 0.4s;
-}
-.registration{
-    width: 90px;
-    height: 30px;
-    font-size: 11px;
-    background-color: #d0c3ac;
-    border: 1px solid black;
-    color: black;
-    padding-left: 4px;
-    border-bottom-left-radius: 10px;
-    border-top-left-radius: 10px;
-    cursor: pointer;
-    transition-duration: 0.4s;
-}
-
-
-.authorization{
-    display: flex;
-    justify-content: space-between;
 }
 
 .pagination{
+    color: white;
     display: flex;
     width: 100%;
     box-sizing: border-box;
     justify-content: center;
-    color: white;
+
     padding-right: 10px;
 }
 
@@ -203,6 +147,9 @@ img{
     height: 180px;
 }
 p{
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
     display: flex;
     justify-content: center;
     position: relative;
@@ -217,18 +164,7 @@ p{
     width: unset;
     position: absolute;
 }
-p.name{
-    /*margin-top: 190px;*/
-    /*margin: 0 auto;*/
-    margin-top: -3px;
-    align-items: center;
-    margin-bottom: 6px;
-}
 
-p.cost{
-    position: relative;
-    justify-content: unset;
-}
 .card{
     display: flex;
     width: 180px;
@@ -271,53 +207,18 @@ p.cost{
     color: #667ec0;
     transition-duration: 0.5s;
 }
-.deleteButton:hover{
-    background-color: #1e1f22;
-    color: #667ec0;
-    transition-duration: 0.4s;
-}
-.editButton:hover{
-    background-color: #1e1f22;
-    color: #667ec0;
-    transition-duration: 0.4s;
-}
-
-.deleteButton{
-    width: 180px;
-    font-size: 15px;
-    padding: 3px;
-    background-color: #d0c3ac;
-    color: #1e1f22;
-    border: 1px solid  #1e1f22;
-    border-radius: 5px;
-    transition-duration: 0.4s;
-}
-
-.editButton{
-    font-size: 13px;
-    padding: 3px;
-    width: 105px;
-    background-color: #d0c3ac;
-    color: #1e1f22;
-    border: 1px solid  #1e1f22;
-    border-radius: 5px;
-    transition-duration: 0.4s;
-}
 
 .cardButtons{
     position: relative;
     width: 180px;
-    height: 55px;
+    height: 30px;
     display: flex;
     justify-content: space-between;
-    margin-top: 29px;
+    margin-top: 48px;
     flex-direction: column;
 
 }
-.next{
-    justify-content: space-between;
-    display: flex;
-}
+
 
 .infoButAdmin{
     font-size: 13px;
@@ -335,25 +236,5 @@ p.cost{
     transition-duration: 0.4s;
 }
 
-.topBut{
-    height: 30px;
-    font-size: 12px;
-    background-color: #d0c3ac;
-    color: #1e1f22;
-    border: 1px solid  #1e1f22;
-    border-radius: 10px;
-    transition-duration: 0.4s;
-}
 
-.topBut:hover{
-    background-color: #1e1f22;
-    color: #667ec0;
-    transition-duration: 0.4s;
-}
-
-.buy {
-    display: flex;
-    width: 160px;
-    justify-content: space-between;
-}
 

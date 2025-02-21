@@ -16,10 +16,10 @@ public class Registration {
     private final PasswordEncoder passwordEncoder;
     public final UserRepository userRepository;
     @GetMapping(path = "/registration")
-    public String reg(Model model, @RequestParam(name = "tov_id") Long tov_id) {
+    public String reg(Model model) {
         User user = new User();
         model.addAttribute("reg", user);
-        model.addAttribute("tov_id", tov_id);
+
 
         return "data_ht9";
     }

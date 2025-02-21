@@ -24,6 +24,8 @@ public class SecurityConfig {
             authConfigurer.anyRequest().permitAll();
         });
 
+
+
         httpSecurity.formLogin(formLoginConfigurer -> {
             formLoginConfigurer.defaultSuccessUrl("/products");
         });
@@ -31,6 +33,13 @@ public class SecurityConfig {
         httpSecurity.logout(logoutConfigurer -> {
             logoutConfigurer.logoutSuccessUrl("/products");
         });
+        httpSecurity.formLogin(formLoginConfigurer -> {
+            formLoginConfigurer
+                    .loginPage("/login")
+                    .defaultSuccessUrl("/products")
+                    .permitAll();
+        });
+        
         return httpSecurity.build();
     }
 

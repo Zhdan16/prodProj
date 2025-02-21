@@ -28,6 +28,8 @@ public class CatalogService {
     public BasketRepository basketRepository;
     @Autowired
     public OrderProductRepository orderProductRepository;
+    @Autowired
+    public CategoryRepository categoryRepository;
 
     public Product productSearch(Long prod_id){
         return productRepository.getReferenceById(prod_id);
@@ -47,7 +49,7 @@ public class CatalogService {
         return new ArrayList<>(valuesRepository.value(prod_id));
     }
 
-    public Integer rating(Long prod_id){
+    public Double rating(Long prod_id){
         return reviewRepository.rate(prod_id);
     }
 
@@ -63,6 +65,18 @@ public class CatalogService {
     }
     public List<Product> prodRepositFind(){
         return productRepository.products();
+    }
+
+    public List<Product> filterProd(String category){
+        List<Product> productList = new ArrayList<>();
+
+        for (Product product : prodRepositFind()) {
+            if (product.getCategory().getName().toLowerCase().contains(category.toLowerCase())) {
+                productList.add(product);
+            }
+        }
+
+        return productList;
     }
     public ReviewRepository saveRev(){
         return reviewRepository;
@@ -104,4 +118,11 @@ public class CatalogService {
 
         productRepository.delete(product);
     }
+
+    public List<Category> categoryElem(){
+        return categoryRepository.findAll();
+    }
+
+
 }
+

@@ -3,55 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Информация о товаре</title>
+    <link rel="stylesheet"  th:href="@{/style/styleForDataHt4.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<div>
-    <div style="width: 500px; border: 1px solid black; padding: 3px; margin-bottom: 10px">
-        <p>Категория: <b th:text="${product.getCategory().getName()}"></b></p>
-        <p>Название: <b th:text="${product.getName()}"></b></p>
-        <p>Стоимость: <b th:text="${product.getPrice()}"></b></p>
+<div class="mainDiv">
+    <div class="info">
+        <div class="photo">
+            <p>Здесь будет фото товара</p>
+            <img src="">
+        </div>
+
+        <div class="description">
+            <div class="nameCost">
+                <p>Категория: <b th:text="${product.getCategory().getName()}"></b></p>
+                <div class="line"></div>
+                <p>Название: <b th:text="${product.getName()}"></b></p>
+                <div class="line"></div>
+                <p>Стоимость: <b th:text="${product.getPrice()}"></b>тг.</p>
+            </div>
+            <p class="names">Характеристики:</p>
+            <div class="characteristics">
+            <th:block th:if="${!values.isEmpty()}">
+                    <th:block  th:each="value : ${values}">
+                        <p th:if="${product.getId() == value.getProduct().getId()}"> <b th:text="${value.getOption().getName()}"></b>: <b th:text="${value.getValue()}"></b> </b></p>
+                        <div class="line"></div>
+                    </th:block>
+
+            </th:block>
+                <th:block th:if="${values.isEmpty()}">
+                    <p>Характеристики отсутствуют</p>
+
+                </th:block>
+            </div>
+            <div class="names">
+                <p>Отзывы:</p>
+                <th:block th:if="${rating} != 'n'">
+                    <p>Рейтинг: <b th:text="${rating}">
+                    </b>
+                    </p></th:block>
+                </div>
+            <div class="reviews">
+            <th:block th:if="${!reviews.isEmpty()}">
+                <th:block th:each="rewiew : ${reviews}">
+                    <p><b th:text="${rewiew.getUser().getFirstName()}"></b> <b th:text="${rewiew.getUser().getLastName()}"></b> : <b th:text="${rewiew.getText()}"></b>&nbsp&nbsp&nbsp(Оценка: <b th:text="${rewiew.getRate()}"></b>)</p>
+                    <div class="line"></div>
+                </th:block>
+            </th:block>
+                <th:block th:if="${reviews.isEmpty()}">
+                    <p>Отзывов пока нет</p>
+
+                </th:block>
+            </div>
+
+        </div>
     </div>
-    <th:block th:if="${!reviews.isEmpty()}">
-        <div style="width: 500px; border: 1px solid black; padding: 3px">
-            Отзывы:
-            <th:block th:each="rewiew : ${reviews}">
-                <p><b th:text="${rewiew.getUser().getFirstName()}"></b> <b th:text="${rewiew.getUser().getLastName()}"></b> : <b th:text="${rewiew.getText()}"></b>    Оценка: <b th:text="${rewiew.getRate()}"></b></p>
-            </th:block>
-            <p>Рейтинг: <b th:text="${rating}"></b></p>
-        </div>
-    </th:block>
-
-
-
-    <th:block th:if="${!values.isEmpty()}">
-        <div style="width: 500px; border: 1px solid black; padding: 3px; margin-top: 10px">
-            Характеристики:
-            <th:block  th:each="value : ${values}">
-                <p th:if="${product.getId() == value.getProduct().getId()}"> <b th:text="${value.getOption().getName()}"></b>: <b th:text="${value.getValue()}"></b> </b></p>
-            </th:block>
-        </div>
-    </th:block>
-
-
-    <div style="display: flex; margin-top: 5px; margin-left: 3px; justify-content: space-between; width: 500px">
+    <div class="buttons">
+        <form action="/products">
+            <input type="submit" value="Вернуться на главную">
+            <input type="hidden" name="page" th:value="${1}">
+        </form>
         <th:block th:if="${user == null  && ifadmin.equals(false) }">
             <form action="/rev">
                 <input type="submit" value="Оставить отзыв">
                 <input type="hidden" name="tov_id" th:value="${product.id}">
             </form>
         </th:block>
-        <form action="/products">
-            <input type="submit" value="Вернуться на главную">
-            <input type="hidden" name="page" th:value="${1}">
-        </form>
         <th:block th:if="${!ifadmin.equals(true) && user != 'not'}">
+
             <form method="post" action="/basket" >
                 <input type="hidden" name="tov_id" th:value="${product.getId()}">
                 <input type="submit" value="Добавить в корзину">
             </form>
         </th:block>
     </div>
-
 </div>
+
 </body>
 </html>

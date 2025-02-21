@@ -1,0 +1,152 @@
+*{
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
+    overflow-x: hidden;
+    box-sizing: border-box;
+}
+
+body{
+
+    padding: 0;
+    margin: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(180deg, #000000,#212121,#4f4f4f) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.info{
+
+    display: flex;
+    position: absolute;
+    height: 500px;
+    width: 800px;
+    background-color: #d0c3ac;
+    border-radius: 20px;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    border: 2px solid black;
+}
+
+.photo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #667ec0;
+    position: relative;
+    margin-top: 20px;
+    margin-right: 20px;
+    width: 420px;
+    height: 420px;
+    background-color: #1e1f22;
+    border-radius: 20px;
+}
+
+.description{
+    overflow-x: hidden;
+    margin-left: 20px;
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    width: 314px;
+    height: 420px;
+    flex-direction: column;
+}
+
+.reviews{
+
+}
+
+.nameCost{
+    padding: 4px;
+    overflow-y: hidden;
+
+    height: 76px;
+    background-color: #1e1f22;
+    color: #667ec0;
+    border-radius: 10px;
+
+}
+
+p{
+    margin: 1px;
+}
+
+.mainDiv{
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 750px;
+    position: relative;
+    margin-top: 440px;
+}
+
+.characteristics{
+    padding: 4px;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 76px;
+
+    background-color: #1e1f22;
+    color: #667ec0;
+    border-radius: 10px;
+}
+
+.reviews{
+    padding: 4px;
+    overflow-y: auto;
+    overflow-x: auto;
+    height: 224px;
+    background-color: #1e1f22;
+    color: #667ec0;
+    border-radius: 10px;
+}
+
+.names{
+    display: flex;
+    justify-content: space-between;
+}
+
+.line{
+    position: relative;
+    width: 98%;
+    margin: 0 auto;
+    height: 2px;
+    background-color: #45464a;
+}
+
+.reviews::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+.characteristics::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+input{
+    border-radius: 20px;
+    border: 1px solid black;
+    outline: none;
+    padding: 7px;
+    font-size: 14px;
+    background-color: #d0c3ac;
+    transition-duration: 0.4s;
+}
+
+input:hover{
+    background-color: #1e1f22;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: #667ec0;
+}

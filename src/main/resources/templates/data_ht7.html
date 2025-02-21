@@ -3,20 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <title>Мои заказы</title>
+    <link rel="stylesheet"  th:href="@{/style/styleForDataHt7.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<th:block th:each="ord : ${order}">
-    <div style="width: 500px; border: 1px solid black; padding: 3px; margin-bottom: 10px">
-        <p>категория продукта: <b th:text="${ord.getProduct().getCategory().getName()}"></b></p>
-        <p>название продукта: <b th:text="${ord.getProduct().getName()}"></b></p>
-        <p>цена продукта: <b th:text="${ord.getProduct().getPrice()}"></b></p>
-        <p>количество продукта: <b th:text="${ord.getCount()}"></b></p>
-    </div>
 
-</th:block>
-<form action="/products">
-    <input type="submit" value="Вернуться на главную">
+<div class="top_block"><form class="back" action="/products">
+    <input type="submit" class="butBack" value="Вернуться на главную">
     <input type="hidden" name="page" th:value="${1}">
-</form>
+</form> </div>
+
+<div class="mainPage">
+    <th:block th:each="i: ${#numbers.sequence((page * 6) - 6, page * 6 - 1)}" >
+        <div class="product" th:if="${i < order.size()}">
+            <div class="photo">
+                <img src="">
+                <div class="translucent"></div>
+                <p> Здесь будет фото товара</p>
+            </div>
+
+            <div class="card" >
+                <div class="description">
+                    <p class="name"><b th:text="${order[i].getProduct().getName()}"></b></p>
+                    <p class="cost">Цена:&nbsp<b th:text="${order[i].getProduct().getPrice()}"></b>тг.</p>
+                    <p>Количество товара:<b th:text="${order[i].getCount()}"></b></p>
+                </div>
+
+                <form class="cardButtons" name="info" action="/info">
+                    <input type="hidden" name="prod_id" th:value="${order[i].getProduct().getId()}">
+                    <input type="submit" class="infoButAdmin" value="Подробнее">
+                </form>
+
+            </div>
+        </div>
+
+    </th:block>
+</div>
+
+
+<div class="pagination">
+    <th:block th:if="${pages != 0}"  th:each="i: ${#numbers.sequence(1, pages)}">
+        <form action="/order">
+            <input type="hidden" name="page" th:value="${i}">
+            <th:block th:if="${page != i}">
+                <input type="submit" class="submitButton" th:value="${i}">
+            </th:block>
+            <th:block th:if="${page == i}">
+                <input type="submit" class="submitButtonClick" th:value="${i}">
+            </th:block>
+        </form>
+
+    </th:block>
+    <th:block th:if="${pages == 0}">
+        <p class="pagText">Вы еще не заказали товары</p>
+    </th:block>
+</div>
+
 </body>
 </html>

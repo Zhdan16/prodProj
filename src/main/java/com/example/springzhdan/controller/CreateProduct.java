@@ -14,6 +14,7 @@ public class CreateProduct {
     @GetMapping(path = "/create")
     public String secondResource(Model model) {
         model.addAttribute("product", new Product());
+        model.addAttribute("catChoose", catalogService.categoryElem());
         return "data_ht2";
     }
 

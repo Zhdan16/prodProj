@@ -3,20 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <title>Отзыв</title>
+    <link rel="stylesheet"  th:href="@{/style/styleForDataHt5.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<div >
-    Отзыв:
-    <form style="width: 200px; margin-bottom: 2px" th:object="${review}" method="post" action="/rev">
-        <input type="hidden" th:value="${review.user.id}" th:field="*{user.id}" >
-        <input style="margin-bottom: 4px" type="number" th:field="*{rate}" placeholder="Введите оценку">
-        <input style="margin-bottom: 4px" type="text" th:field="*{text}" placeholder="Введите текст отзыва">
-        <input type="hidden" th:value="${review.getProduct().id}" th:field="*{product.id}">
-        <input type="submit" value="Отправить отзыв">
 
-    </form>
+
+<div class="addCard">
+    <div class="adding">
+        <h1>
+            Отзыв:
+        </h1>
+        <form class="formRate" th:object="${review}" method="post" action="/rev">
+            <input type="hidden" th:value="${review.user.id}" th:field="*{user.id}" >
+            <div class="sel">
+                <p>Выбирите оценку: </p>
+                <select  th:field="*{rate}">
+                    <option  th:value="${1}" ><b th:text="1"></b></option>
+                    <option  th:value="${2}" ><b th:text="2"></b></option>
+                    <option  th:value="${3}" ><b th:text="3"></b></option>
+                    <option  th:value="${4}" ><b th:text="4"></b></option>
+                    <option  th:value="${5}" ><b th:text="5"></b></option>
+
+                </select>
+            </div>
+            <div>
+                <input type="text"  th:field="*{text}" placeholder="Введите текст отзыва">
+                <input type="hidden" th:value="${review.getProduct().id}" th:field="*{product.id}">
+            </div>
+            <input type="submit" value="Отправить отзыв">
+
+        </form>
+    </div>
+</div>
+
+<div class="top_block">
     <form action="/products">
-        <input type="submit" value="Вернуться на главную">
+        <input type="submit" class="back" value="Вернуться на главную">
         <input type="hidden" name="page" th:value="${1}">
     </form>
 </div>

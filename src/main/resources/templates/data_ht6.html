@@ -3,49 +3,84 @@
 <head>
     <meta charset="UTF-8">
     <title>Корзина</title>
+    <link rel="stylesheet"  th:href="@{/style/styleForDataHt6.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-    <th:block th:each="prod : ${basket}">
-        <div style="display: flex; align-items: center; border: 1px solid #000000; padding: 3px; margin-bottom: 4px">
-            <div style="margin-right: 10px" >
-                <p>Категория: <b th:text="${prod.getProduct().getCategory().getName()}"></b></p>
-                <p>Название: <b th:text="${prod.getProduct().getName()}"></b></p>
-                <p>Стоимость: <b th:text="${prod.getProduct().getPrice()}"></b></p>
-            </div>
-
-            <p>Количество товара: <b th:text="${prod.getCount()}"></b></p>
-
-            <div style="margin-left:20px; display: flex; width: 50px; justify-content: space-between">
-                <form method="post" style="width: 15px; height: 15px;" action="/basket">
-                    <input type="hidden" name="tov_id" th:value="${prod.getProduct().getId()}">
-                    <input type="hidden" name="operation" th:value="${'+'}">
-                    <input type="hidden" name="if_bas" th:value="${true}">
-                    <input type="submit" value="+">
-                </form>
-                <form method="post" style="width: 15px; height: 15px;" action="/basket">
-                    <input type="hidden" name="tov_id" th:value="${prod.getProduct().getId()}">
-                    <input type="hidden" name="operation" th:value="${'-'}">
-                    <input type="hidden" name="if_bas" th:value="${true}">
-                    <input type="submit" value="-">
-                </form>
-            </div>
-
-
-            <form style="margin-left: 100px;margin-right: 100px;width: 50px; height: 21px;" name="info" action="/info">
-                <input type="hidden" name="prod_id" th:value="${prod.getProduct().getId()}">
-                <input type="submit" value="Информация о товаре">
-            </form>
-
-            <form method="post" style="margin-left: 100px;margin-right: 100px;width: 50px; height: 21px;" name="bs" action="/order">
-                <input type="hidden" name="tov_id" th:value="${prod.getProduct().getId()}" >
-                <input type="hidden" name="count" th:value="${prod.getCount()}" >
-                <input type="submit" value="Заказать">
-            </form>
-        </div>
-    </th:block>
-    <form action="/products">
-        <input type="submit" value="Вернуться на главную">
+    <div class="top_block"><form class="back" action="/products">
+        <input type="submit" class="butBack" value="Вернуться на главную">
         <input type="hidden" name="page" th:value="${1}">
-    </form>
+    </form> </div>
+
+    <div class="mainPage">
+        <th:block th:each="i: ${#numbers.sequence((page * 6) - 6, page * 6 - 1)}" >
+            <div class="product" th:if="${i < basket.size()}">
+                <div class="photo">
+                    <img src="">
+                    <div class="translucent"></div>
+                    <p> Здесь будет фото товара</p>
+                </div>
+
+                <div class="card" >
+                    <div class="description">
+
+                        <p class="name"><b th:text="${basket[i].getProduct().getName()}"></b></p>
+                        <p class="cost">Цена:&nbsp<b th:text="${basket[i].getProduct().getPrice()}"></b>тг.</p>
+                        <p>Количество товара: <b th:text="${basket[i].getCount()}"></b></p>
+                    </div>
+
+                        <div class="plusMinus">
+                            <form method="post" action="/basket">
+                                <input type="hidden" name="tov_id" th:value="${basket[i].getProduct().getId()}">
+                                <input type="hidden" name="operation"  th:value="${'+'}">
+                                <input type="hidden" name="if_bas" th:value="${true}">
+                                <input type="submit" class="plus" value="+">
+                            </form>
+                            <form method="post"  action="/basket">
+                                <input type="hidden" name="tov_id" th:value="${basket[i].getProduct().getId()}">
+                                <input type="hidden" name="operation"  th:value="${'-'}">
+                                <input type="hidden" name="if_bas" th:value="${true}">
+                                <input type="submit" class="minus" value="-">
+                            </form>
+                        </div>
+
+
+                    <form method="post" name="bs" action="/order">
+                        <input type="hidden" name="tov_id" th:value="${basket[i].getProduct().getId()}" >
+                        <input type="hidden" name="count" th:value="${basket[i].getCount()}" >
+                        <input type="submit" class="ord" value="Заказать">
+                    </form>
+                    <form class="cardButtons" name="info" action="/info">
+                        <input type="hidden" name="prod_id" th:value="${basket[i].getProduct().getId()}">
+                        <input type="submit" class="infoButAdmin" value="Подробнее">
+                    </form>
+
+                </div>
+            </div>
+
+        </th:block>
+    </div>
+
+
+    <div class="pagination">
+        <th:block th:if="${pages != 0}"  th:each="i: ${#numbers.sequence(1, pages)}">
+            <form action="/basket">
+                <input type="hidden" name="page" th:value="${i}">
+                <th:block th:if="${page != i}">
+                    <input type="submit" class="submitButton" th:value="${i}">
+                </th:block>
+                <th:block th:if="${page == i}">
+                    <input type="submit" class="submitButtonClick" th:value="${i}">
+                </th:block>
+            </form>
+
+        </th:block>
+        <th:block th:if="${pages == 0}">
+            <p class="pagText">Вы еще не добавили товары в корзину</p>
+        </th:block>
+    </div>
 </body>
 </html>

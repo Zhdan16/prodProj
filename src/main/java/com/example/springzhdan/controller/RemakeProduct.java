@@ -16,13 +16,14 @@ public class RemakeProduct {
 
         model.addAttribute("product", catalogService.productSearch(prod_id));
         model.addAttribute("page", page);
+        model.addAttribute("catChoose", catalogService.categoryElem());
         return "data_ht3";
     }
 
     @RequestMapping(value = "/remake", method = RequestMethod.POST)
-    public String remakeProdOk(Product product, Integer page) {
+    public String remakeProdOk(Product product) {
 
         catalogService.saveProd().save(product);
-        return "redirect:/products?page=" + page;
+        return "redirect:/products?page=1" ;
     }
 }

@@ -1,0 +1,90 @@
+*{
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    height: 100vh;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-size: cover;
+    width: 100vw;
+    background: linear-gradient(180deg, #000000,#212121,#4f4f4f) no-repeat center center fixed;
+}
+
+.login-container{
+    width: 400px;
+    height: 200px;
+    display: flex;
+    align-items: center;
+
+    background-color: #d0c3ac;
+    border-radius: 20px;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+button{
+    margin-top: 5px;
+    background-color: #d0c3ac;
+    outline: none;
+    border-radius: 10px;
+    height: 25px;
+    padding-left: 10px;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+}
+
+button:hover{
+    background-color: #1e1f22;
+    color: #667ec0;
+    transition-duration: 0.4s;
+    cursor: pointer;
+}
+
+.field{
+    display: flex;
+    justify-content: space-between;
+    width: 350px;
+    margin-bottom: 20px;
+}
+input{
+    width: 290px;
+    background-color: #d0c3ac;
+    outline: none;
+    border-radius: 10px;
+    height: 25px;
+    padding-left: 10px;
+    border: 2px solid black;
+    transition-duration: 0.4s;
+}
+
+input:hover{
+    background-color: #1e1f22;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    color: white;
+}
+
+p{
+    display: flex;
+    align-items: center;
+    margin: 2px;
+
+}
+
+.forma{
+    display: flex;
+    flex-direction: column;
+
+    height: 80px;
+    width: 350px;
+}
+
+h2{
+    margin: 12px;
+}

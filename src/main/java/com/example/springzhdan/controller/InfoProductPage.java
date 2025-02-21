@@ -29,7 +29,7 @@ public class InfoProductPage {
         model.addAttribute("reviews", catalogService.reviewList(prod_id));
         model.addAttribute("options", catalogService.optionList());
         model.addAttribute("values", catalogService.valueList(prod_id));
-        model.addAttribute("rating", catalogService.rating(prod_id));
+        model.addAttribute("rating", String.format("%.1f", catalogService.rating(prod_id)));
 
         if (userService.getCurrentUser() != null){
             model.addAttribute("user", catalogService.rev(prod_id));

@@ -1,0 +1,120 @@
+*{
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+body{
+    margin: 0;
+
+    width: 100vw;
+    height: 100vh;
+
+    background: linear-gradient(180deg, #000000,#212121,#4f4f4f) no-repeat center center fixed;
+    background-size: cover;
+}
+
+.cards{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.comment{
+    width: 400px;
+    padding: 10px;
+    font-size: 14px;
+    background-color: #d0c3ac;
+    color: black;
+    border: 1px solid black;
+    border-radius: 10px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+p{
+    margin: 2px;
+    font-size: 16px;
+}
+
+.top_block{
+    width: 100vw;
+    height: 50px;
+    padding: 10px;
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+
+}
+.butBack{
+    margin-right: 5px;
+    color: #1e1f22;
+    background-color: #d0c3ac;
+    border: 1px solid  #1e1f22;
+    border-radius: 5px;
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 30px;
+    width: 150px;
+    transition-duration: 0.4s;
+}
+.butBack:hover{
+    background-color: #1e1f22;
+    color: #667ec0;
+    transition-duration: 0.4s;
+}
+
+input{
+    color: #1e1f22;
+    background-color: #d0c3ac;
+    border: 1px solid  #1e1f22;
+    border-radius: 5px;
+    font-family: "Pangolin", serif;
+    font-weight: 400;
+    font-style: normal;
+    height: 30px;
+    width: 150px;
+    transition-duration: 0.4s;
+}
+
+input:hover{
+    background-color: #1e1f22;
+    color: #667ec0;
+    transition-duration: 0.4s;
+}
+
+.field{
+    background-color: #1e1f22;
+    color: #667ec0;
+    border-radius: 10px;
+    padding: 5px;
+
+}
+
+.field.com{
+    overflow-wrap: break-word;
+    overflow-y: auto;
+    height: 80px;
+}
+
+
+.line{
+    position: relative;
+    width: 98%;
+    margin: 0 auto;
+    height: 2px;
+    background-color: #45464a;
+}
+
+.field::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+}
+
+
+

@@ -5,6 +5,9 @@
   <meta charset="UTF-8">
   <title>Список товаров</title>
   <link rel="stylesheet"  th:href="@{/style/styleForDataHt.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
 </head>
 <body>
 <div class="top_block" >
@@ -14,96 +17,124 @@
 <!--      <p>Фамилия: <b th:text="${user.getLastName()}"></b></p>-->
 <!--    </div>-->
 <!--  </th:block>-->
-  <div class="form">
-    <form name="myForm" action="/products">
-      <input type="text" th:value="${tex}" placeholder="Введите название категории..." name="filter" style="width: 300px">
+  <div class="filter">
+    <form name="myForm" class="form" action="/products">
+      <input type="text" class="filterTextField" th:value="${tex}" placeholder="Поиск по категории" name="filter" >
       <input type="hidden" name="page" th:value="${1}">
-      <input type="submit" value="Отфильтровать">
+      <input type="submit" class="filterBut" value="Отфильтровать">
     </form>
+
   </div>
 
   <th:block th:if="${ifadmin.equals(true)}">
     <form class="two" name="myForm" action="/create">
-      <input type="submit" value="добавить товар">
+      <input type="submit" class="topBut" value="добавить товар">
     </form>
     <form class="two" name="myForm" action="/reviews">
-      <input type="submit" value="комментарии">
+      <input type="submit" class="topBut" value="комментарии">
     </form>
   </th:block>
 
 
   <th:block th:if="${user == null}">
     <div class="authorization">
-      <form class="two" action="/registration">
-        <input type="hidden" name="tov_id" th:value="${1}">
-        <input type="submit" value="Регистрация">
+      <form class="" action="/registration">
+        <input type="submit"  class="registration" value="Регистрация">
       </form>
       <form action="/log">
-        <input type="submit" value="Вход">
+        <input type="submit" class="login" value="Вход">
       </form>
     </div>
   </th:block>
-
+  <th:block th:if="${!ifadmin.equals(true) && user != null}">
+    <div class="buy">
+      <form action="/order">
+        <input type="submit" class="topBut" value="Мои заказы">
+      </form>
+      <form  action="/basket">
+        <input type="submit" class="topBut" value="Моя корзина">
+      </form>
+    </div>
+  </th:block>
   <th:block th:if="${user != null}">
       <form class="two" action="/logout">
         <input type="hidden" name="tov_id" th:value="${1}">
-        <input type="submit" value="Выход">
+        <input type="submit" class="topBut"  value="Выход">
       </form>
   </th:block>
 
-  <th:block th:if="${!ifadmin.equals(true) && user != null}">
-    <div class="buy">
-      <form style="margin-bottom: 10px" action="/order">
-        <input type="submit" value="Мои заказы">
-      </form>
-      <form style="margin-bottom: 10px" action="/basket">
-        <input type="submit" value="Моя корзина">
-      </form>
-    </div>
-  </th:block>
+
 
 </div>
 
-<div class="grid">
-  <th:block th:each="i: ${#numbers.sequence((page * 10) - 10, page * 10 - 1)}" >
+<div class="mainPage">
+  <th:block th:each="i: ${#numbers.sequence((page * 6) - 6, page * 6 - 1)}" >
     <div class="product" th:if="${i < products.size()}">
-      <div class="one" >
-        <p>Категория: <b th:text="${products[i].getCategory().getName()}"></b></p>
-        <p>Название: <b th:text="${products[i].getName()}"></b></p>
-        <p>Стоимость: <b th:text="${products[i].getPrice()}"></b></p>
 
-        <th:block th:if="${ifadmin.equals(true)}">
-          <form class="two"  name="myForm" action="/remake">
-            <input type="hidden" name="param" th:value="${products[i].getId()}">
-            <input type="hidden" name="page" th:value="${page}">
-            <input type="submit" value="Отредактировать">
-          </form>
-        </th:block>
-        <th:block th:if="${ifadmin.equals(true)}">
-          <form method="post" class="two"  name="myForm" action="/del">
-            <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
-            <input type="submit" value="удалить товар">
-          </form>
-        </th:block>
+      <div class="photo">
+        <img src="">
+        <div class="translucent"></div>
+          <p> Здесь будет фото товара</p>
+      </div>
 
-        <form class="two" name="info" action="/info">
-          <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
-          <input type="submit" value="Информация о товаре">
-        </form>
+      <div class="card" >
+        <div class="description">
+          <p class="name"><b th:text="${products[i].getName()}"></b></p>
+          <p class="cost">Цена:&nbsp<b th:text="${products[i].getPrice()}"></b>тг.</p>
+        </div>
+
+          <th:block th:if="${ifadmin.equals(true)}">
+            <div class="cardButtons">
+              <div class="next">
+                <form  name="myForm" action="/remake">
+                  <input type="hidden" name="param" th:value="${products[i].getId()}">
+                  <input type="hidden" name="page" th:value="${page}">
+                  <input type="submit" class="editButton" value="Отредактировать">
+                </form>
+
+                <form name="info" action="/info">
+                  <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
+                  <input type="submit" class="infoButAdmin" value="Подробнее">
+                </form>
+              </div>
+
+            <form method="post"   name="myForm" action="/del">
+              <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
+              <input type="submit" class="deleteButton" value="Удалить товар">
+            </form>
+              </div>
+          </th:block>
+          <th:block th:if="${!ifadmin.equals(true)}">
+            <form name="info" action="/info">
+              <input type="hidden" name="prod_id" th:value="${products[i].getId()}">
+              <input type="submit" class="infoBut" value="Подробнее">
+            </form>
+          </th:block>
+
+        </div>
       </div>
-      </div>
+
+
   </th:block>
 </div>
 
 
 <div class="pagination">
-  <th:block  th:each="i: ${#numbers.sequence(1, pages)}">
+  <th:block th:if="${pages != 0}"  th:each="i: ${#numbers.sequence(1, pages)}">
     <form action="/products">
       <input type="hidden" name="filter" th:value="${tex}">
       <input type="hidden" name="page" th:value="${i}">
-      <input style="margin-left: 10px" type="submit" th:value="${i}">
+      <th:block th:if="${page != i}">
+        <input type="submit" class="submitButton" th:value="${i}">
+      </th:block>
+      <th:block th:if="${page == i}">
+        <input type="submit" class="submitButtonClick" th:value="${i}">
+      </th:block>
     </form>
 
+  </th:block>
+  <th:block th:if="${pages == 0}">
+    <p class="pagText">По вашему запросу ничего не найдено</p>
   </th:block>
 </div>
 

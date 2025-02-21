@@ -2,25 +2,30 @@
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Отзыв</title>
+    <title>Регистрация</title>
+    <link rel="stylesheet"  th:href="@{/style/styleForDataHt9.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<div >
-    Регистрация:
-    <form style="width: 200px; margin-bottom: 2px" th:object="${reg}" method="post" action="/registration">
+<div class="reg">
+    <h1>Регистрация:</h1>
+    <form style="width: 200px; margin-bottom: 2px" th:object="${reg}" class="formReg" method="post" action="/registration">
 
-        <input style="margin-bottom: 4px" type="text" th:field="*{email}" placeholder="Введите почту">
-        <input style="margin-bottom: 4px" type="text" th:field="*{password}" placeholder="Введите пароль">
-        <input style="margin-bottom: 4px" type="text" th:field="*{firstName}" placeholder="Введите имя">
-        <input style="margin-bottom: 4px" type="text" th:field="*{lastName}" placeholder="Введите фамилию">
+        <input type="text" class="field" th:field="*{email}" placeholder="Введите почту">
+        <input type="text" class="field" th:field="*{password}" placeholder="Введите пароль">
+        <input type="text" class="field" th:field="*{firstName}" placeholder="Введите имя">
+        <input type="text" class="field" th:field="*{lastName}" placeholder="Введите фамилию">
 
-        <input type="submit" value="Зарегестрироваться">
+        <input type="submit" class="butReg" value="Зарегестрироваться">
 
-    </form>
-    <form action="/products">
-        <input type="submit" value="Вернуться на главную">
-        <input type="hidden" name="page" th:value="${1}">
     </form>
 </div>
+<form action="/products">
+    <input type="submit" class="back2" value="Вернуться на главную">
+    <input type="hidden" name="page" th:value="${1}">
+</form>
 </body>
 </html>

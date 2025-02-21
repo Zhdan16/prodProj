@@ -12,11 +12,15 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+import static java.lang.Math.ceil;
+
 @Controller
 @RequiredArgsConstructor
 public class ProductsPage {
     private final CatalogService catalogService;
     public final UserService userService;
+//    private final UserRepository userRepository;
+//    public final PasswordEncoder passwordEncoder;
     @GetMapping(path = "/products")
 
     public String secondResource(Model model, @RequestParam(name = "filter", required = false) String category, @RequestParam(name = "page", required = false) Integer page) {
@@ -33,11 +37,9 @@ public class ProductsPage {
         if (page == null) {
             return "redirect:/products?page=1";
         }
-        List<Product> productList = new ArrayList<>();
-        Long userId = null;
+
 
         if (userService.getCurrentUser() != null) {
-            userId = userService.getCurrentUser().getId();
             model.addAttribute("user", userService.getCurrentUser());
             model.addAttribute("ifadmin", userService.getCurrentUser().getAdmin());
         } else {
@@ -45,29 +47,22 @@ public class ProductsPage {
             model.addAttribute("ifadmin", false);
         }
 
-        if (userId != null) {
-            if (category == null || category.isEmpty()) {
+        if (category == null || category.isEmpty()) {
+            model.addAttribute("products", catalogService.prodRepositFind());
+            model.addAttribute("pages", (int) Math.ceil(catalogService.prodRepositFind().size() / 6.0));
 
-                model.addAttribute("products", catalogService.prodRepositFind());
-                model.addAttribute("pages", (catalogService.prodRepositFind().size() + 9) / 10);
-            } else {
-                for (Product product : catalogService.prodRepositFind()) {
-                    if (product.getCategory().getName().toLowerCase().contains(category.toLowerCase())) {
-                        productList.add(product);
-                    }
-                }
-                model.addAttribute("tex", category);
-                model.addAttribute("products", productList);
-                model.addAttribute("pages", (productList.size() + 9) / 10);
-            }
         } else {
-            productList.addAll(catalogService.findProd());
-            model.addAttribute("products", productList);
-            model.addAttribute("pages", (productList.size() + 9) / 10);
+            model.addAttribute("tex", category);
+            if (!catalogService.filterProd(category).isEmpty()){
+                model.addAttribute("products", catalogService.filterProd(category));
+                model.addAttribute("pages", (int) Math.ceil(catalogService.filterProd(category).size() / 6.0));
+
+            }else {
+                model.addAttribute("products", catalogService.filterProd(category));
+                model.addAttribute("pages", 0);
+            }
         }
-
         model.addAttribute("page", page);
-
         return "data_ht";
     }
 }

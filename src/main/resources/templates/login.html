@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Login</title>
+  <link rel="stylesheet" th:href="@{/style/login.css}"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
+</head>
+<body>
+<div class="login-container">
+  <h2>Вход</h2>
+  <form class="forma" th:action="@{/login}" method="post">
+    <div class="field">
+      <p>Логин:</p>
+      <input type="text" id="username" name="username" required>
+    </div>
+    <div class="field">
+      <p>Пароль:</p>
+      <input type="password" id="password" name="password" required>
+    </div>
+    <button type="submit">Войти</button>
+  </form>
+</div>
+</body>
+</html>

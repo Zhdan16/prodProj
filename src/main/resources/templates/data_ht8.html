@@ -3,30 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Комментарии</title>
+    <link rel="stylesheet"  th:href="@{/style/styleForDataHt8.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
+<div class="top_block"><form class="back" action="/products">
+    <input type="submit" class="butBack" value="Вернуться на главную">
+    <input type="hidden" name="page" th:value="${1}">
+</form> </div>
+<div class="cards">
     <th:block th:each="c : ${check}">
-        <div th:if="${!c.getPublished()}">
-            <div style="margin-bottom: 10px;border: 1px solid black;border-radius: 30px; padding-left: 30px;padding-top: 3px;padding-bottom: 3px;">
-                <p>Имя: <b th:text="${c.getUser().getFirstName()}"></b> </p><p>Фамилия: <b th:text="${c.getUser().getLastName()}"></b></p>
-                <p>Категория: <b th:text="${c.getProduct().getCategory().getName()}"></b></p>
-                <p>Название: <b th:text="${c.getProduct().getName()}"></b></p>
-                <p>Цена: <b th:text="${c.getProduct().getPrice()}"></b></p>
-                <p>Текст комментария: <b th:text="${c.getText()}"></b></p>
-                <p>Оценка: <b th:text="${c.getRate()}"></b></p>
-                <form method="post" style="margin-bottom: 10px" action="/reviews">
-                    <input type="submit" value="Опубликовать">
-                    <input type="hidden" name="comId" th:value="${c.getId()}">
-
-                </form>
-
+        <div class="comment" th:if="${!c.getPublished()}">
+            <p>Пользователь:</p>
+            <div class="field">
+                <p>Имя: <b th:text="${c.getUser().getFirstName()}"></b> </p>
+                <div class="line"></div>
+                <p>Фамилия: <b th:text="${c.getUser().getLastName()}"></b></p>
             </div>
+            <p>Товар:</p>
+            <div class="field">
+                <p>Категория: <b th:text="${c.getProduct().getCategory().getName()}"></b></p>
+                <div class="line"></div>
+                <p>Название: <b th:text="${c.getProduct().getName()}"></b></p>
+                <div class="line"></div>
+                <p>Цена: <b th:text="${c.getProduct().getPrice()}"></b></p>
+            </div>
+            <p>Текст комментария:</p>
+            <p class="field com"> <b th:text="${c.getText()}"></b></p>
+            <p class="rate">Оценка: <b th:text="${c.getRate()}"></b></p>
+            <form method="post"  action="/reviews">
+                <input type="submit" value="Опубликовать">
+                <input type="hidden" name="comId" th:value="${c.getId()}">
+
+            </form>
+
+
         </div>
 
     </th:block>
-    <form action="/products">
-        <input type="submit" value="Вернуться на главную">
-        <input type="hidden" name="page" th:value="${1}">
-    </form>
+
+</div>
+
+
+
 </body>
 </html>

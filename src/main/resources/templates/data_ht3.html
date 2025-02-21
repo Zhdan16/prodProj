@@ -3,29 +3,52 @@
 <head>
     <meta charset="UTF-8">
     <title>Редактирование товара</title>
+    <link rel="stylesheet"  th:href="@{/style/styleForDataHt3.css}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<div style="margin: 0 auto; width: 320px">
-    <h1 style="width: 320px; margin: 0 auto">Редактировать товар</h1>
-    <form style="margin-left: 8%;margin-top: 10px;" th:object="${product}" method="post" action="/remake">
 
-        <label style="margin-right: 5px" for="category">Категория:</label>
-        <input type="number" th:value="${product.getCategory().getId()}" th:field="*{category.id}" id="category" style="margin-bottom: 20px"/>
-        <br/>
-        <label style="margin-right: 10px" for="name">Название:</label>
-        <input type="text" th:value="${product.getName()}" th:field="*{name}" id="name" style="margin-bottom: 20px" />
-        <br/>
-        <label for="price">Стоимость:</label>
-        <input type="number" th:value="${product.getPrice()}" th:field="*{price}" id="price" style="margin-bottom: 20px"/>
-        <br/>
-        <input type="hidden" th:value="${product.getId()}" th:field="*{id}"/>
-        <input type="submit" value="Изменить товар" />
-        <form action="/products">
-            <input type="submit" value="Назад">
-            <input type="hidden" name="page" th:value="${page}">
+
+
+
+<div class="addCard">
+    <div class="adding">
+        <h1>Редактировать товар</h1>
+        <form th:object="${product}" method="post" class="formCard" action="/remake">
+            <div class="fields">
+                <p>Выберите категорию:</p>
+                <select th:field="*{category.id}" required>
+                    <option th:each="i : ${catChoose}"
+                            th:value="${i.id}"
+                            th:text="${i.name}"
+                            th:selected="${i.id == product.getCategory()?.getId()}">
+                    </option>
+                </select>
+            </div>
+            <div class="fields">
+                <p>Наименование товара:</p>
+                <input type="text" th:value="${product.getName()}" th:field="*{name}" />
+            </div>
+            <div class="fields">
+                <p>Цена товара:</p>
+                <input type="number" th:value="${product.getPrice()}" th:field="*{price}"/>
+                <input type="hidden" th:value="${product.getId()}" th:field="*{id}"/>
+
+            </div>
+
+            <input type="submit" class="addProd" value="Изменить товар" />
         </form>
-    </form>
+
+    </div>
+
 
 </div>
+<form action="/products">
+    <input type="submit" class="back" value="Вернуться на главную">
+    <input type="hidden" name="page" th:value="${1}">
+</form>
 </body>
 </html>

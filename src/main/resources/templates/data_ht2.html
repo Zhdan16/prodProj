@@ -3,26 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>Добавить товар</title>
+  <link rel="stylesheet"  th:href="@{/style/styleForDataHt2.css}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@1,500&family=Pangolin&family=Russo+One&display=swap" rel="stylesheet">
+
 </head>
 <body>
-<div style="margin: 0 auto; width: 260px">
-  <h1 style="width: 230px; margin: 0 auto">Добавить товар</h1>
-  <form style="margin-top: 10px;" th:object="${product}" method="post" action="/create">
-    <label style="margin-right: 5px" for="category">Категория:</label>
-    <input type="number" th:field="*{category}" id="category" style="margin-bottom: 20px"/>
-    <br/>
-    <label style="margin-right: 10px" for="name">Название:</label>
-    <input type="text" th:field="*{name}" id="name" style="margin-bottom: 20px" />
-    <br/>
-    <label for="price">Стоимость:</label>
-    <input type="number" th:field="*{price}" id="price" style="margin-bottom: 20px"/>
-    <br/>
-    <input type="submit" value="Добавить товар" />
-  </form>
-  <form action="/products">
-    <input type="submit" value="Вернуться на главную">
-    <input type="hidden" name="page" th:value="${1}">
-  </form>
+<div class="addCard">
+  <div class="adding">
+    <h1>Добавить товар</h1>
+    <form th:object="${product}" method="post" class="formCard" action="/create">
+      <div class="fields">
+        <p>Выберите категорию:</p>
+        <select name="category">
+          <th:block th:each="i : ${catChoose}">
+            <option th:field="*{category}" th:value="${i.getId()}" id="category"><b th:text="${i.name}"></b></option>
+          </th:block>
+        </select>
+      </div>
+      <div class="fields">
+        <p>Наименование товара:</p>
+        <input type="text" th:field="*{name}" />
+      </div>
+      <div class="fields">
+        <p>Цена товара:</p>
+        <input type="number" th:field="*{price}"/>
+
+      </div>
+      <input type="submit" class="addProd" value="Добавить товар" />
+    </form>
+  </div>
+
+
 </div>
+<form action="/products">
+  <input type="submit" class="back" value="Вернуться на главную">
+  <input type="hidden" name="page" th:value="${1}">
+</form>
 </body>
 </html>
